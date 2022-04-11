@@ -6,7 +6,7 @@ import { getUser } from './services/auth';
 import { useState } from 'react';
 import SpotDetail from './views/SpotDetail/SpotDetail';
 import SpotSearch from './views/SpotSearch/SpotSearch';
-import NewSpot from './views/OwnerPost/NewSpot';
+import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
 import Profile from './views/Profile/Profile';
 import Nav from './components/Nav';
