@@ -10,7 +10,7 @@ function Nav() {
       <NavLink to="/spots/search">
         <h4>Search</h4>
       </NavLink>
-      <NavLink to="/profile">
+      <NavLink to="/profile/:id">
         <h4>Profile</h4>
       </NavLink>
     </div>
