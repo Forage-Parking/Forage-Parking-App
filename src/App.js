@@ -9,6 +9,7 @@ function App() {
   const user = getUser();
   const [currentUser, setCurrentUser] = useState(user);
   return (
+
     <BrowserRouter>
       <Switch>
         <div className="App">
