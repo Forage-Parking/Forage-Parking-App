@@ -9,12 +9,6 @@ function App() {
   const user = getUser();
   const [currentUser, setCurrentUser] = useState(user);
   return (
-<<<<<<< HEAD
-    <div className="App">
-      FORAGE PARKING <br></br>The best parking app that ever existed!
-    </div>
-=======
-
     <BrowserRouter>
       <Switch>
         <div className="App">
@@ -27,7 +21,6 @@ function App() {
         </div>
       </Switch>
     </BrowserRouter>
->>>>>>> 049ea16222ecb570e57f110b86508ea6a37cab13
   );
 }
 
