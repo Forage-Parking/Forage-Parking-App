@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from 'react';
-import { getUser, logout } from '../../services/auth';
+import { getUser, logout } from '../services/auth';
 
 const BasicContext = createContext();
 
 const BasicProvider = ({ children }) => {
-
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(getUser());
 
@@ -14,14 +13,20 @@ const BasicProvider = ({ children }) => {
   };
 
   return (
-    <BasicContext.Provider value={{
-          //loading state/ currentUser check
-      loading, setLoading, currentUser, setCurrentUser, handleLogout
-          ///
-
-    }}>{children}</BasicContext.Provider>
+    <BasicContext.Provider
+      value={{
+        //loading state/ currentUser check
+        loading,
+        setLoading,
+        currentUser,
+        setCurrentUser,
+        handleLogout,
+        ///
+      }}
+    >
+      {children}
+    </BasicContext.Provider>
   );
-
 };
 
 const useBasicContext = () => {
@@ -34,4 +39,3 @@ const useBasicContext = () => {
 };
 
 export { BasicProvider, useBasicContext };
-

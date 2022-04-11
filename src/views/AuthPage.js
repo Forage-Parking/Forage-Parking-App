@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { signInUser, signupUser } from '../../services/auth';
-import Auth from '../Auth';
+import { signInUser, signupUser } from '../services/auth';
+import Auth from '../components/Auth';
 import { useHistory } from 'react-router-dom';
 
 function AuthPage({ setCurrentUser }) {
@@ -17,7 +17,7 @@ function AuthPage({ setCurrentUser }) {
       try {
         const resp = await signInUser(email, password);
         setCurrentUser(resp.email);
-        history.push('/todo');
+        history.push('/');
       } catch (e) {
         setError(e.message);
       }
@@ -25,7 +25,7 @@ function AuthPage({ setCurrentUser }) {
       try {
         const resp = await signupUser(email, password);
         setCurrentUser(resp.email);
-        history.push('/todo');
+        history.push('/');
       } catch (e) {
         setError(e.message);
       }
