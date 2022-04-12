@@ -4,16 +4,21 @@ import Map from '../components/Map';
 
 export default function Home() {
   const [spots, setSpots] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchSpots();
       console.log(data);
       setSpots(data);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
+  if (loading) {
+    return 'loading';
+  }
   return (
     <>
       <div>
@@ -23,7 +28,7 @@ export default function Home() {
         ))}
       </div>
       <div>
-        <Map />
+        <Map spots={spots} />
       </div>
     </>
   );
