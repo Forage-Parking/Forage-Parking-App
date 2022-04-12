@@ -12,7 +12,7 @@ export default function Upload({ url, size, onUpload }) {
 
   const downloadImage = async (path) => {
     try {
-      const { data, error } = await client.storage.from('avatars').download(path);
+      const { data, error } = await client.storage.from('mybucket').download(path);
       if (error) {
         throw error;
       }
@@ -36,7 +36,7 @@ export default function Upload({ url, size, onUpload }) {
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      let { error: uploadError } = await client.storage.from('avatars').upload(filePath, file);
+      let { error: uploadError } = await client.storage.from('mybucket').upload(filePath, file);
 
       if (uploadError) {
         throw uploadError;
