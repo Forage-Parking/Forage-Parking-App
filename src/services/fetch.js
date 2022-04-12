@@ -12,10 +12,17 @@ export async function newSpot(spot) {
 
 //this needs a policy
 export async function createBucket() {
-  const resp = await client.storage.create('avatars', { public: false });
+  const resp = await client.storage.create('image', { public: false });
   return checkError(resp);
 }
 
-// const { data, error } = await supabase
-//   .from('cities')
-//   .select()
+this needs a policy
+export async function uploadImage() {
+  const imageFile = event.target.files[0];
+  const { data, error } = await supabase.storage
+    .from('avatars')
+    .upload('public/avatar1.png', imageFile, {
+      cacheControl: '3600',
+      upsert: false,
+    });
+}
