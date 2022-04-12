@@ -26,14 +26,13 @@ export default function SpotDetail() {
   }, [id]);
 
   const onReserve = async () => {
-    const resp = await newReservation(id, getUserId());
-    
+    const resp = await newReservation(id, getUserId());   
   };
 
   const returnSpot = async () => {
     // await endReservation();
     const data = await mostRecent(spot.id);
-    console.log(data);
+    await endReservation(data.id);
   };
 
   // if (loading) return <h1>Loading Details<h1/>;

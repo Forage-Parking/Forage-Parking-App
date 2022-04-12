@@ -27,8 +27,7 @@ export async function endReservation(id) {
   const resp = await client 
     .from('reservations')
     .update({ end_time: new Date() })
-    .match({ id })
-    .order('start_time', { descending: true });
+    .match({ id });
   return checkError(resp);
 }
 
@@ -38,6 +37,7 @@ export async function mostRecent(spot_id) {
     .select('*')
     .order('start_time', { ascending: false })
     .match({ spot_id })
-    .limit(1);
+    .limit(1)
+    .single();
   return checkError(resp);
 }
