@@ -13,6 +13,9 @@ function Nav() {
       <NavLink to="/profile/:id">
         <h4>Profile</h4>
       </NavLink>
+      <NavLink to="/spots/new">
+        <h4>New Spot</h4>
+      </NavLink>
     </div>
   );
 }

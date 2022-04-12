@@ -4,10 +4,7 @@ import Upload from '../../components/Upload/Upload';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
-  // const [uploading, setUploading] = useState(false);
-  // const [loading, setLoading] = useState(true);
-  // const [username, setUsername] = useState(null);
-  // const [website, setWebsite] = useState(null);
+
   const [avatar_url, setAvatar_Url] = useState(null);
 
   return (

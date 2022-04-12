@@ -8,7 +8,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchSpots();
-      console.log(data);
+
       setSpots(data);
     };
     fetchData();

@@ -10,14 +10,6 @@ export async function newSpot(spot) {
   return checkError(resp);
 }
 
-//this needs a policy
-// export async function createBucket() {
-//   const resp = await client.storage.create('image', { public: false });
-//   return checkError(resp);
-// }
-
-// export async function  Upllet { error: uploadError } = await client.storage.from('mybucket').upload(filePath, file);
-
 export async function fetchSpotById(id) {
   const resp = await client.from('parking-spots').select('*').match({ id }).single();
 
