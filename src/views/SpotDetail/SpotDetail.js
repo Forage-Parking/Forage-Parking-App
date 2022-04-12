@@ -46,9 +46,9 @@ export default function SpotDetail() {
 
       <button onClick={onReserve}>Reserve Spot</button>
 
-      <div>
+      {/* <div>
         <Map />
-      </div>
+      </div> */}
     </div>
   );
 }
