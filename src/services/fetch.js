@@ -19,3 +19,30 @@ export async function createBucket() {
 // const { data, error } = await supabase
 //   .from('cities')
 //   .select()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchSpotById(id) {
+  const resp = await client
+    .from('parking-spots')
+    .select('*')
+    .match({ id })
+    .single();
+
+  return checkError(resp);
+}
