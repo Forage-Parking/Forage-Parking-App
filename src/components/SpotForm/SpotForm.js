@@ -15,8 +15,8 @@ export default function SpotForm() {
       </select>
       <label htmlFor="details">Spot Description</label>
       <textarea name="details" id="details" cols="30" rows="10"></textarea>
-      <label htmlFor="image">Upload Image</label>
-      <input type="file" name="image" />
+      {/* <label htmlFor="image">Upload Image</label> */}
+      {/* <input type="file" name="image" /> */}
       <button>Save Spot</button>
     </form>
   );

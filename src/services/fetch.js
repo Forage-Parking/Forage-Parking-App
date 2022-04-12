@@ -11,10 +11,10 @@ export async function newSpot(spot) {
 }
 
 //this needs a policy
-export async function createBucket() {
-  const resp = await client.storage.create('avatars', { public: false });
-  return checkError(resp);
-}
+// export async function createBucket() {
+//   const resp = await client.storage.create('image', { public: false });
+//   return checkError(resp);
+// }
 
 // const { data, error } = await supabase
 //   .from('cities')
