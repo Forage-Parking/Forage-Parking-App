@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../../components/Map';
-import { fetchSpotById, newReservation } from '../../services/fetch';
+import { endReservation, fetchSpotById, mostRecent, newReservation } from '../../services/fetch';
 import { useBasicContext } from '../../context/BasicContext';
 import { getUserId } from '../../services/auth';
 
@@ -27,6 +27,13 @@ export default function SpotDetail() {
 
   const onReserve = async () => {
     const resp = await newReservation(id, getUserId());
+    
+  };
+
+  const returnSpot = async () => {
+    // await endReservation();
+    const data = await mostRecent(spot.id);
+    console.log(data);
   };
 
   // if (loading) return <h1>Loading Details<h1/>;
@@ -45,6 +52,8 @@ export default function SpotDetail() {
       </div>
 
       <button onClick={onReserve}>Reserve Spot</button>
+
+      <button onClick={returnSpot}>Return Spot</button>
 
       {/* <div>
         <Map />
