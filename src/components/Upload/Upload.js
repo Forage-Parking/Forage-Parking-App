@@ -48,6 +48,7 @@ export default function Upload({ url, size, onUpload }) {
     } finally {
       setUploading(false);
     }
+    // downloadImage();
   };
 
   return (
