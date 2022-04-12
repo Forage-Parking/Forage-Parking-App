@@ -13,7 +13,7 @@ export default function NewSpot() {
   const [size, setSize] = useState('');
   const [details, setDetails] = useState('');
   const [nickname, setNickname] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState('5');
   const [loading, setLoading] = useState(false);
 
   const user = getUserId();
