@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../../components/Map';
-import { fetchSpotById } from '../../services/fetch';
+import { fetchSpotById, newReservation } from '../../services/fetch';
+import { useBasicContext } from '../../context/BasicContext';
+import { getUserId } from '../../services/auth';
 
 export default function SpotDetail() {
   const [spot, setSpot] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');
-
   const { id } = useParams();
   const history = useHistory();
 
@@ -24,10 +25,14 @@ export default function SpotDetail() {
     fetchData();
   }, [id]);
 
+  const onReserve = async () => {
+    const resp = await newReservation(id, getUserId());
+  };
+
   // if (loading) return <h1>Loading Details<h1/>;
 
   return (
-    <div className='SpotDetails'>
+    <div className="SpotDetails">
       {error && <p>{error}</p>}
 
       <div key={spot.id}>
@@ -39,10 +44,11 @@ export default function SpotDetail() {
         {/* <p>{spot.available}</p> */}
       </div>
 
-      <div>
-        <Map/>
-      </div>
+      <button onClick={onReserve}>Reserve Spot</button>
 
+      <div>
+        <Map />
+      </div>
     </div>
-  ) ;
+  );
 }
