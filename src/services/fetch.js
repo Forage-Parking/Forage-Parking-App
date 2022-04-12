@@ -16,13 +16,33 @@ export async function newSpot(spot) {
 //   return checkError(resp);
 // }
 
-// this needs a policy
-export async function uploadImage() {
-  const imageFile = event.target.files[0];
-  const { data, error } = await client.storage
-    .from('avatars')
-    .upload('public/avatar1.png', imageFile, {
-      cacheControl: '3600',
-      upsert: false,
-    });
+// const { data, error } = await supabase
+//   .from('cities')
+//   .select()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchSpotById(id) {
+  const resp = await client
+    .from('parking-spots')
+    .select('*')
+    .match({ id })
+    .single();
+
+  return checkError(resp);
 }
