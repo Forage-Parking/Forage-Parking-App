@@ -3,9 +3,10 @@ import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { fetchSpots } from '../services/fetch';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN;
 
-export default function Map() {
+export default function Map({ spots }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lat, setLat] = useState(45.523064);
@@ -19,8 +20,13 @@ export default function Map() {
       center: [lng, lat],
       zoom: zoom,
     });
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`<p>site one</p>`);
-    new mapboxgl.Marker().setLngLat([lng, lat]).setPopup(popup).addTo(map.current);
+    spots.map((spot) => {
+      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`<p>${spot.details}</p>`);
+      new mapboxgl.Marker()
+        .setLngLat([spot.longitutue, spot.lattitude])
+        .setPopup(popup)
+        .addTo(map.current);
+    });
   });
   useEffect(() => {
     const geocoder = new MapboxGeocoder({
