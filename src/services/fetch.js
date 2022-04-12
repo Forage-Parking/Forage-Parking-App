@@ -16,13 +16,13 @@ export async function createBucket() {
   return checkError(resp);
 }
 
-this needs a policy
-export async function uploadImage() {
-  const imageFile = event.target.files[0];
-  const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload('public/avatar1.png', imageFile, {
-      cacheControl: '3600',
-      upsert: false,
-    });
-}
+// this needs a policy
+// export async function uploadImage() {
+//   const imageFile = event.target.files[0];
+//   const { data, error } = await supabase.storage
+//     .from('avatars')
+//     .upload('public/avatar1.png', imageFile, {
+//       cacheControl: '3600',
+//       upsert: false,
+//     });
+// }
