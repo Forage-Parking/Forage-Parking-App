@@ -1,5 +1,10 @@
 import React from 'react';
+import SpotForm from '../../components/SpotForm/SpotForm';
 
 export default function NewSpot() {
-  return <div>Newspot</div>;
+  return (
+    <div>
+      <SpotForm />
+    </div>
+  );
 }
