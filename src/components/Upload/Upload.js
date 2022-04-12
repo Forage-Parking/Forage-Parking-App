@@ -19,7 +19,7 @@ export default function Upload({ url, size, onUpload }) {
       const url = URL.createObjectURL(data);
       setAvatarUrl(url);
     } catch (error) {
-      console.log('Error downloading image: ', error.message);
+      'Error downloading image: ', error.message;
     }
   };
 
@@ -54,7 +54,7 @@ export default function Upload({ url, size, onUpload }) {
     <div style={{ width: size }} aria-live="polite">
       <img
         src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
-        alt={avatarUrl ? 'Avatar' : 'No image'}
+        alt={avatarUrl ? 'image' : 'No image'}
         className="avatar image"
         style={{ height: size, width: size }}
       />

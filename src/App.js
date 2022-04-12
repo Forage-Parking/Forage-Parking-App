@@ -5,7 +5,7 @@ import Home from './views/Home';
 import { getUser } from './services/auth';
 import { useState } from 'react';
 import SpotDetail from './views/SpotDetail/SpotDetail';
-import SpotSearch from './views/SpotSearch/SpotSearch';
+
 import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
 import Profile from './views/Profile/Profile';
@@ -25,9 +25,7 @@ function App() {
           <Route exact path="/">
             {currentUser ? <Home /> : <Redirect to="/auth" />}
           </Route>
-          <Route exact path="/spots/search">
-            {currentUser ? <SpotSearch /> : <Redirect to="/auth" />}
-          </Route>
+
           <Route exact path="/spots/detail/:id">
             {currentUser ? <SpotDetail /> : <Redirect to="/auth" />}
           </Route>
