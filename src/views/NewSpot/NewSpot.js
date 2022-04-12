@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
-import { getUserId } from '../../services/auth';
+import { fetchSignedUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatar_Url, setAvatar_Url] = useState(null);
   const [ownerId, setOwnerId] = useState('user');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
@@ -16,6 +17,14 @@ export default function NewSpot() {
   const [loading, setLoading] = useState(false);
 
   const user = getUserId();
+  useEffect(() => {
+    const fetchUrl = async () => {
+      const data = await fetchSignedUrl(avatarUrl);
+      setAvatar_Url(data.signedURL);
+    };
+    fetchUrl();
+  }, [avatarUrl]);
+
   // const [avatar_url, setAvatar_Url] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +36,7 @@ export default function NewSpot() {
         owner_id: user,
         details: details,
         price: price,
-        image: avatarUrl,
+        image: avatar_Url,
         Name: nickname,
       };
       let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
