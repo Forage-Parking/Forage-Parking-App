@@ -32,16 +32,17 @@ export default function SpotDetail() {
 
       <div key={spot.id}>
         {/* <img src = placeholder/> */}
-        <p>{spot.size}</p>
+        <p>{spot.Name}</p>
         <p>{spot.price}</p>
-        <p>{spot.name}</p>
+        <p>{spot.size}</p>
+        <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
       </div>
 
       <div>
         <Map/>
       </div>
-      
+
     </div>
   ) ;
 }
