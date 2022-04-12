@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
+import { getUserId } from '../../services/auth';
+import { client } from '../../services/client';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -11,15 +13,50 @@ export default function NewSpot() {
   const [details, setDetails] = useState('');
   const [nickname, setNickname] = useState('');
   const [price, setPrice] = useState('');
+  const [loading, setLoading] = useState(false);
 
+  const user = getUserId();
   // const [avatar_url, setAvatar_Url] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  console.log(avatarUrl);
+    try {
+      setLoading(true);
+      const updates = {
+        created_at: new Date(),
+        owner_id: user,
+        details: details,
+        price: price,
+        image: avatarUrl,
+        Name: nickname,
+      };
+      let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
 
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  loading && 'loading';
   return (
     <>
       <div>
-        <SpotForm {...{ setOwnerId, setLat, setLng, setSize, setDetails, setNickname, setPrice }} />
+        <SpotForm
+          {...{
+            setOwnerId,
+            setLat,
+            setLng,
+            setSize,
+            setDetails,
+            setNickname,
+            setPrice,
+            handleSubmit,
+          }}
+        />
       </div>
       <div>
         <Upload

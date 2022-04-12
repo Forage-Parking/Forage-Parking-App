@@ -9,9 +9,10 @@ export default function SpotForm({
   setDetails,
   setNickname,
   setPrice,
+  handleSubmit,
 }) {
   return (
-    <form className="spot-form">
+    <form className="spot-form" onSubmit={handleSubmit}>
       <label htmlFor="nickname">Enter a Nickname for Your Spot</label>
       <input
         type="text"
