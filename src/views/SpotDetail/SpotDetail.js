@@ -15,6 +15,7 @@ export default function SpotDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
         const resp = await fetchSpotById(id);
         setSpot(resp);
         setLoading(false);
@@ -35,6 +36,12 @@ export default function SpotDetail() {
     await endReservation(data.id);
   };
 
+  const isAvailable = async () => {
+    const data = await mostRecent(spot.id);
+    console.log((data.end_time !== null));
+    return (data.end_time !== null);
+  };
+
   // if (loading) return <h1>Loading Details<h1/>;
 
   return (
@@ -53,6 +60,8 @@ export default function SpotDetail() {
       <button onClick={onReserve}>Reserve Spot</button>
 
       <button onClick={returnSpot}>Return Spot</button>
+
+      <button onClick={() => isAvailable()}>The Truth</button>
 
       {/* <div>
         <Map />
