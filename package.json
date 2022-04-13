@@ -5,6 +5,7 @@
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^5.0.0",
     "@reach/visually-hidden": "^0.16.0",
+    "@splidejs/react-splide": "^0.7.5",
     "@supabase/supabase-js": "^1.28.5",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",

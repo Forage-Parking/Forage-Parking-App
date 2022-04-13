@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
-import { fetchSignedUrl, getUserId } from '../../services/auth';
+import { fetchPublicUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -61,7 +61,7 @@ export default function NewSpot() {
   const user = getUserId();
   useEffect(() => {
     const fetchUrl = async () => {
-      const data = await fetchSignedUrl(avatarUrl);
+      const data = await fetchPublicUrl(avatarUrl);
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
