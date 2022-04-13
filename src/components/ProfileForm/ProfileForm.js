@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ProfileForm.css';
 
-export default function ProfileForm({ setFirstName, setLastName, setUserName, handleSubmit }) {
+export default function ProfileForm({ setFirstName, setLastName, setUsername, handleSubmit }) {
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
       <label>First Name</label>
@@ -23,7 +23,7 @@ export default function ProfileForm({ setFirstName, setLastName, setUserName, ha
         type="text"
         name="username"
         placeholder="Username"
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
       />
 
       <button>Save Profile</button>
