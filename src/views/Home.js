@@ -4,6 +4,7 @@ import Map from '../components/Map';
 import styled from 'styled-components';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [spots, setSpots] = useState([]);
@@ -28,20 +29,22 @@ export default function Home() {
         FORAGE PARKING <br></br>The best parking app that ever existed!
         <Splide
           options={{
-            perPage: 3,
+            perPage: 1,
             arrows: false,
             pagination: false,
             drag: 'free',
-            gap: '3em,',
+            gap: '10px',
           }}
         >
           {spots.map((spot) => (
             <SplideSlide key={spot.id}>
               <Card>
-                <span>{spot.name}</span>
-                <p>{spot.details}</p>
-                <img src={spot.image} />
-                <Gradient />
+                <Link to={`/spots/detail/${spot.id}`}>
+                  <span>{spot.name}</span>
+                  <p>{spot.details}</p>
+                  <img src={spot.image} />
+                  <Gradient />
+                </Link>
               </Card>
             </SplideSlide>
           ))}
