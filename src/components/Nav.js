@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { IoLeafOutline } from 'react-icons/io5';
 
 function Nav() {
   return (
     <StyledList>
       <StyledNavLink exact to="/">
+        <IoLeafOutline />
         <h4>Home</h4>
       </StyledNavLink>
       <StyledNavLink to="/profile/:id">
