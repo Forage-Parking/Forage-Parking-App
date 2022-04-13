@@ -29,7 +29,7 @@ export async function logout() {
   return checkError(response);
 }
 
-export async function fetchPublicUrl(x) {
-  const resp = await client.storage.from('mybucket').getPublicUrl(x).single();
+export async function fetchSignedUrl(x) {
+  const resp = await client.storage.from('mybucket').createSignedUrl(x, 315360000);
   return checkError(resp);
 }
