@@ -1,20 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import mapboxgl from '!mapbox-gl';
+import styled from 'styled-components';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar_Url, setAvatar_Url] = useState(null);
-  const [ownerId, setOwnerId] = useState('user');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
   const [size, setSize] = useState('');
   const [details, setDetails] = useState('');
   const [nickname, setNickname] = useState('');
   const [price, setPrice] = useState('5');
   const [loading, setLoading] = useState(false);
+
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lat, setLat] = useState(45.523064);
+  const [lng, setLng] = useState(-122.676483);
+  const [zoom, setZoom] = useState(9);
+
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [lng, lat],
+      zoom: zoom,
+    });
+
+    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`<p>your new spot</p>`);
+    new mapboxgl.Marker().setLngLat([lng, lat]).setPopup(popup).addTo(map.current);
+  });
+  useEffect(() => {
+    const geocoder = new MapboxGeocoder({
+      accessToken: process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN,
+      marker: {
+        color: 'orange',
+      },
+      mapboxgl: mapboxgl,
+    });
+    map.current.addControl(geocoder);
+    setLng(map.current.getCenter().lng.toFixed(4));
+    setLat(map.current.getCenter().lat.toFixed(4));
+    setZoom(map.current.getZoom().toFixed(2));
+  }, []);
+
+  useEffect(() => {
+    if (!map.current) return;
+    map.current.on('move', () => {
+      setLng(map.current.getCenter().lng.toFixed(4));
+      setLat(map.current.getCenter().lat.toFixed(4));
+      setZoom(map.current.getZoom().toFixed(2));
+    });
+  });
 
   const user = getUserId();
   useEffect(() => {
@@ -38,6 +80,8 @@ export default function NewSpot() {
         price: price,
         image: avatar_Url,
         Name: nickname,
+        lattitude: lat,
+        longitutue: lng,
       };
       let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
 
@@ -56,9 +100,6 @@ export default function NewSpot() {
       <div>
         <SpotForm
           {...{
-            setOwnerId,
-            setLat,
-            setLng,
             setSize,
             setDetails,
             setNickname,
@@ -67,6 +108,9 @@ export default function NewSpot() {
           }}
         />
       </div>
+      <Container>
+        <Smap ref={mapContainer} />
+      </Container>
       <div>
         <Upload
           url={avatarUrl}
@@ -80,3 +124,13 @@ export default function NewSpot() {
     </>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Smap = styled.div`
+  height: 400px;
+  width: 400px;
+`;

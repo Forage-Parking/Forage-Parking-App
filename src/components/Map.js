@@ -3,8 +3,6 @@ import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { fetchSpots } from '../services/fetch';
-import { useHistory } from 'react-router-dom';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN;
 
 export default function Map({ spots }) {
