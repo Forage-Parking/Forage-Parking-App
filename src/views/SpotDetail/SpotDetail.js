@@ -31,7 +31,13 @@ export default function SpotDetail() {
 
   // if (loading) return <h1>Loading Details</h1>;
 
-  const onReserve = () => {};
+  const onReserve = async () => {
+    // create a new reservation newReservation(spot_id, renter_id)
+    // update available
+    const newRes = await newReservation(spot.id, getUserId());
+    setAvailable(false);
+  };
+
   const returnSpot = async () => {
     // get most reservation by spot
     // update end_time - endReservation()
