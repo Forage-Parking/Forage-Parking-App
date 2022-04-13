@@ -64,7 +64,7 @@ export default function Upload({ url, size, onUpload }) {
       ) : (
         <>
           <label className="button primary block" htmlFor="single">
-            Upload an avatar
+            Upload an image
           </label>
           <VisuallyHidden>
             <input

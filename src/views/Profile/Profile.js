@@ -6,6 +6,7 @@ import { client } from '../../services/client';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchProfiles } from '../../services/fetch';
 import { Link } from 'react-router-dom';
+import './Profile.css';
 
 export default function Profile({ currentUser }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
