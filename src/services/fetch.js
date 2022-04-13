@@ -19,7 +19,8 @@ export async function fetchSpotById(id) {
 export async function newReservation(spot_id, renter_id) {
   const resp = await client
     .from('reservations')
-    .insert([{ spot_id, renter_id: renter_id, start_time: new Date() }]);
+    .insert([{ spot_id, renter_id: renter_id, start_time: new Date() }])
+    .single();
   return checkError(resp);
 }
 export async function fetchProfiles() {
@@ -48,7 +49,6 @@ export async function mostRecent(spot_id) {
     .select('*')
     .order('start_time', { ascending: false })
     .match({ spot_id })
-    .limit(1)
-    .single();
+    .limit(1);
   return checkError(resp);
 }

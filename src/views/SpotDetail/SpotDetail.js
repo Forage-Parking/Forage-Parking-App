@@ -11,21 +11,21 @@ export default function SpotDetail() {
   const [loading, setLoading] = useState('');
   const { id } = useParams();
   const history = useHistory();
-  const [available, setAvailable] = useState('');
+  const [available, setAvailable] = useState(false);
   const [recentRes, setRecentRes] = useState({});
 
   useEffect(() => {
-
     const getData = async () => {
       try {
+        setLoading(true);
         const data = await fetchSpotById(id);
         setSpot(data);
 
         const recent = await mostRecent(id);
-        setRecentRes(recent);
-        setAvailable(recent.end_time ? true : false);
-      }
-      catch (error){
+        setRecentRes(recent[0] || {});
+        setAvailable(recent.length === 0 || recent[0].end_time ? true : false);
+        setLoading(false);
+      } catch (error) {
         setError(error.message);
       }
     };
@@ -37,30 +37,25 @@ export default function SpotDetail() {
   // setState available true/false depending on end_time of most recent reservation
   //
 
-  // if (loading) return <h1>Loading Details</h1>;
+  if (loading) return <p>Loading Details</p>;
 
-
-
-// renter_id is coming back undefined and we need to have it for a comparison 
+  // renter_id is coming back undefined and we need to have it for a comparison
   const onReserve = async () => {
     // create a new reservation newReservation(spot_id, renter_id)
     // update available
-    // setLoading(true);
     const newRes = await newReservation(spot.id, getUserId());
+    console.log('newRes', newRes);
     setAvailable(false);
     setRecentRes(newRes);
-    // setLoading(false);    
     alert('You have reserved this spot.');
   };
-
-
 
   const returnSpot = async () => {
     // get most reservation by spot
     // update end_time - endReservation()
     // update available
     const recent = await mostRecent(spot.id);
-    const resData = await endReservation(recent.id);
+    const resData = await endReservation(recent[0].id);
     setAvailable(true);
     setRecentRes(resData);
     alert('You have returned this spot.');
@@ -79,11 +74,16 @@ export default function SpotDetail() {
         <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
       </div>
+
       {console.log('userId', getUserId())}
       {console.log('renterId', recentRes.renter_id)}
       {available && <button onClick={onReserve}>Reserve Spot</button>}
-      {recentRes.renter_id && !available && getUserId() === recentRes.renter_id && (<button onClick={returnSpot}>Return Spot</button>)}
-      {!available && getUserId() !== recentRes.renter_id && <p>This Spot is Unavailable. Please Try Another Spot</p>}
+      {recentRes.renter_id && !available && getUserId() === recentRes.renter_id && (
+        <button onClick={returnSpot}>Return Spot</button>
+      )}
+      {!available && getUserId() !== recentRes.renter_id && (
+        <p>This Spot is Unavailable. Please Try Another Spot</p>
+      )}
 
       {/* {available && <button onClick={onReserve}>Reserve Spot</button>}
       {!available && getUserId() === recentRes.renter_id ? 
