@@ -30,6 +30,6 @@ export async function logout() {
 }
 
 export async function fetchSignedUrl(x) {
-  const resp = await client.storage.from('mybucket').createSignedUrl(x, 50000);
+  const resp = await client.storage.from('mybucket').createSignedUrl(x);
   return checkError(resp);
 }

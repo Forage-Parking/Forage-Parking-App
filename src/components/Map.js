@@ -23,10 +23,7 @@ export default function Map({ spots }) {
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
         `<a href=/spots/detail/${spot.id}>${spot.details}</a>`
       );
-      new mapboxgl.Marker()
-        .setLngLat([spot.longitutue, spot.lattitude])
-        .setPopup(popup)
-        .addTo(map.current);
+      new mapboxgl.Marker().setLngLat([spot.lng, spot.lat]).setPopup(popup).addTo(map.current);
     });
   });
   useEffect(() => {

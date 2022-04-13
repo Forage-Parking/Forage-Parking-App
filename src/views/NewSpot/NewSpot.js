@@ -79,9 +79,9 @@ export default function NewSpot() {
         details: details,
         price: price,
         image: avatar_Url,
-        Name: nickname,
-        lattitude: lat,
-        longitutue: lng,
+        name: nickname,
+        lat: lat,
+        lng: lng,
       };
       let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
 

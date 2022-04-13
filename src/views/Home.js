@@ -31,7 +31,7 @@ export default function Home() {
         FORAGE PARKING <br></br>The best parking app that ever existed!
         {spots.map((spot) => (
           <div key={spot.id}>
-            <p>{spot.Name}</p>
+            <p>{spot.name}</p>
             <p>{spot.details}</p>
             <CarImage src={spot.image} />
           </div>
