@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProfileForm.css';
 
-export default function ProfileForm({ setFirstName, setLastName, setUsername, handleSubmit }) {
+export default function ProfileForm({
+  setFirstName,
+  setLastName,
+  setUsername,
+  handleSubmit,
+  setEmail,
+}) {
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
       <label>First Name</label>
@@ -24,6 +30,12 @@ export default function ProfileForm({ setFirstName, setLastName, setUsername, ha
         name="username"
         placeholder="Username"
         onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <button>Save Profile</button>

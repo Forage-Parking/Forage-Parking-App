@@ -22,6 +22,10 @@ export async function newReservation(spot_id, renter_id) {
     .insert([{ spot_id, renter_id: renter_id, start_time: new Date() }]);
   return checkError(resp);
 }
+export async function fetchProfiles() {
+  const resp = await client.from('profiles').select('*');
+  return checkError(resp);
+}
 
 export async function fetchProfileById(id) {
   const resp = await client.from('profiles').select('*').match({ id }).single();
