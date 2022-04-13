@@ -37,18 +37,16 @@ export default function SpotDetail() {
   // setState available true/false depending on end_time of most recent reservation
   //
 
-  if (loading) return <h1>Loading Details</h1>;
+  if (loading) return <p>Loading Details</p>;
 
   // renter_id is coming back undefined and we need to have it for a comparison
   const onReserve = async () => {
     // create a new reservation newReservation(spot_id, renter_id)
     // update available
-    setLoading(true);
     const newRes = await newReservation(spot.id, getUserId());
     console.log('newRes', newRes);
     setAvailable(false);
     setRecentRes(newRes);
-    setLoading(false);
     alert('You have reserved this spot.');
   };
 
