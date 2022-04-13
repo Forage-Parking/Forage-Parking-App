@@ -17,8 +17,8 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <Switch>
-        <div className="App">
+      <div className="App">
+        <Switch>
           <Route path="/auth">
             {!currentUser ? <AuthPage {...{ setCurrentUser }} /> : <Redirect to="/" />}
           </Route>
@@ -38,13 +38,8 @@ function App() {
           <Route exact path="/profile/:id">
             {currentUser ? <Profile /> : <Redirect to="/auth" />}
           </Route>
-
-          {/* //stretch goal// */}
-          {/* <Route exact path="/spots/:id/edit">
-            {currentUser ? <ProfileEdit /> : <Redirect to="/auth" />}
-          </Route> */}
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
