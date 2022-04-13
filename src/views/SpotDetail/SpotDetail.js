@@ -15,13 +15,19 @@ export default function SpotDetail() {
   const [recentRes, setRecentRes] = useState({});
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await fetchSpotById(id);
-      setSpot(data);
 
-      const recent = await mostRecent(id);
-      setRecentRes(recent);
-      setAvailable(recent.end_time ? true : false);
+    const getData = async () => {
+      try {
+        const data = await fetchSpotById(id);
+        setSpot(data);
+
+        const recent = await mostRecent(id);
+        setRecentRes(recent);
+        setAvailable(recent.end_time ? true : false);
+      }
+      catch (error){
+        setError(error.message);
+      }
     };
     getData();
   }, [id]);
@@ -33,13 +39,21 @@ export default function SpotDetail() {
 
   // if (loading) return <h1>Loading Details</h1>;
 
+
+
+// renter_id is coming back undefined and we need to have it for a comparison 
   const onReserve = async () => {
     // create a new reservation newReservation(spot_id, renter_id)
     // update available
+    // setLoading(true);
     const newRes = await newReservation(spot.id, getUserId());
     setAvailable(false);
     setRecentRes(newRes);
+    // setLoading(false);    
+    alert('You have reserved this spot.');
   };
+
+
 
   const returnSpot = async () => {
     // get most reservation by spot
@@ -49,6 +63,8 @@ export default function SpotDetail() {
     const resData = await endReservation(recent.id);
     setAvailable(true);
     setRecentRes(resData);
+    alert('You have returned this spot.');
+    history.push('/');
   };
 
   return (
@@ -63,12 +79,16 @@ export default function SpotDetail() {
         <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
       </div>
-
+      {console.log('userId', getUserId())}
+      {console.log('renterId', recentRes.renter_id)}
       {available && <button onClick={onReserve}>Reserve Spot</button>}
-      {!available && getUserId() === recentRes.renter_id && (
-        <button onClick={returnSpot}>Return Spot</button>
-      )}
+      {recentRes.renter_id && !available && getUserId() === recentRes.renter_id && (<button onClick={returnSpot}>Return Spot</button>)}
       {!available && getUserId() !== recentRes.renter_id && <p>This Spot is Unavailable. Please Try Another Spot</p>}
+
+      {/* {available && <button onClick={onReserve}>Reserve Spot</button>}
+      {!available && getUserId() === recentRes.renter_id ? 
+        <button onClick={returnSpot}>Return Spot</button>
+        : !available && getUserId() !== recentRes.renter_id && <p>This Spot is Unavailable. Please Try Another Spot</p>} */}
 
       {/* <div>
         <Map />
