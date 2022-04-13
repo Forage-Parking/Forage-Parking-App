@@ -12,6 +12,7 @@ export default function SpotDetail() {
   const { id } = useParams();
   const history = useHistory();
   const [available, setAvailable] = useState('');
+  const [recentRes, setRecentRes] = useState({});
 
   useEffect(() => {
     const getData = async () => {
@@ -19,6 +20,7 @@ export default function SpotDetail() {
       setSpot(data);
 
       const recent = await mostRecent(id);
+      setRecentRes(recent);
       setAvailable(recent.end_time ? true : false);
     };
     getData();
@@ -36,6 +38,7 @@ export default function SpotDetail() {
     // update available
     const newRes = await newReservation(spot.id, getUserId());
     setAvailable(false);
+    setRecentRes(newRes);
   };
 
   const returnSpot = async () => {
@@ -45,6 +48,7 @@ export default function SpotDetail() {
     const recent = await mostRecent(spot.id);
     const resData = await endReservation(recent.id);
     setAvailable(true);
+    setRecentRes(resData);
   };
 
   return (
@@ -60,9 +64,8 @@ export default function SpotDetail() {
         {/* <p>{spot.available}</p> */}
       </div>
 
-      {available ? (
-        <button onClick={onReserve}>Reserve Spot</button>
-      ) : (
+      {available && <button onClick={onReserve}>Reserve Spot</button>}
+      {!available && getUserId() === recentRes.renter_id && (
         <button onClick={returnSpot}>Return Spot</button>
       )}
 
