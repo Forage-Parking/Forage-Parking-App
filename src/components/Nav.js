@@ -13,7 +13,6 @@ function Nav() {
     const fetchData = async () => {
       const data = await fetchProfileByUserId(user.id);
       setProfile(data);
-      console.log(data);
     };
     fetchData();
   }, [user]);
