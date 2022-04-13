@@ -1,16 +1,30 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { IoLeafOutline } from 'react-icons/io5';
+import { fetchProfileByUserId } from '../services/fetch';
+import { getUserId } from '../services/auth';
 
 function Nav() {
+  const [profile, setProfile] = useState({});
+  const user = getUserId();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchProfileByUserId(user.id);
+      setProfile(data);
+      console.log(data);
+    };
+    fetchData();
+  }, [user]);
+
   return (
     <StyledList>
       <StyledNavLink exact to="/">
         <IoLeafOutline />
         <h4>Home</h4>
       </StyledNavLink>
-      <StyledNavLink to="/profile/:id">
+      <StyledNavLink to={`/profile/${profile.id}`}>
         <h4>Profile</h4>
       </StyledNavLink>
       <StyledNavLink to="/spots/new">

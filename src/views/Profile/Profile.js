@@ -4,11 +4,11 @@ import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
 import { useHistory, useParams } from 'react-router-dom';
-import { fetchProfiles } from '../../services/fetch';
-import { Link } from 'react-router-dom';
+import { fetchProfileById } from '../../services/fetch';
+
 import './Profile.css';
 
-export default function Profile({ currentUser }) {
+export default function Profile() {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar_Url, setAvatar_Url] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -17,10 +17,10 @@ export default function Profile({ currentUser }) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const [profiles, setProfiles] = useState([]);
+  const [profileDetails, setProfileDetails] = useState([]);
 
-  // const params = useParams();
-  // const id = params.id;
+  const params = useParams();
+  const id = params.id;
   // const [profile_image, setProfile_image] = useState('');
 
   const user = getUserId();
@@ -63,37 +63,36 @@ export default function Profile({ currentUser }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data1 = await fetchProfiles();
+      const data1 = await fetchProfileById(id);
 
-      setProfiles(data1);
+      setProfileDetails(data1);
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
-    <div>
-      {profiles.map((profile) => (
-        <div key={profile.id}>
-          <p>{profile.first_name}</p>
-          <p>{profile.last_name}</p>
-          <p>{profile.username}</p>
-          <img src={profile.image} />
-          {/* <div className="edit-link">
+    <>
+      <div className="profile-details">
+        <p>{profileDetails.first_name}</p>
+        <p>{profileDetails.last_name}</p>
+        <p>{profileDetails.username}</p>
+        <img src={profileDetails.image} />
+        {/* <div className="edit-link">
           {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
         </div> */}
-        </div>
-      ))}
+      </div>
 
-      <ProfileForm
-        {...{
-          setFirstName,
-          setLastName,
-          setUsername,
-          setEmail,
-          handleSubmit,
-        }}
-      />
-
+      <div>
+        <ProfileForm
+          {...{
+            setFirstName,
+            setLastName,
+            setUsername,
+            setEmail,
+            handleSubmit,
+          }}
+        />
+      </div>
       <div>
         <Upload
           url={avatarUrl}
@@ -103,6 +102,6 @@ export default function Profile({ currentUser }) {
           }}
         />
       </div>
-    </div>
+    </>
   );
 }
