@@ -10,6 +10,7 @@ export function getUserId() {
 
 export async function signupUser(email, password) {
   const { user, error } = await client.auth.signUp({ email, password });
+  await client.from('profiles').insert({ user_id: user.id, email: email });
   if (error) {
     throw error;
   }
