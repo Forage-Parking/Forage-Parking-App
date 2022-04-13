@@ -11,6 +11,7 @@ export default function SpotDetail() {
   const [loading, setLoading] = useState('');
   const { id } = useParams();
   const history = useHistory();
+  const [available, setAvailable] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,11 +58,10 @@ export default function SpotDetail() {
         {/* <p>{spot.available}</p> */}
       </div>
 
-      <button onClick={onReserve}>Reserve Spot</button>
+
+      {isAvailable() && <button onClick={onReserve}>Reserve Spot</button>}
 
       <button onClick={returnSpot}>Return Spot</button>
-
-      <button onClick={() => isAvailable()}>The Truth</button>
 
       {/* <div>
         <Map />
