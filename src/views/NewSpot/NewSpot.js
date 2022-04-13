@@ -7,6 +7,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -22,6 +23,7 @@ export default function NewSpot() {
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
   const [zoom, setZoom] = useState(9);
+  const history = useHistory();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -93,6 +95,7 @@ export default function NewSpot() {
     } finally {
       setLoading(false);
     }
+    history.push('/');
   };
   loading && 'loading';
   return (
@@ -117,7 +120,6 @@ export default function NewSpot() {
           size={150}
           onUpload={(url) => {
             setAvatarUrl(url);
-            // updateProfile({ username, website, avatar_url: url });
           }}
         />
       </div>
