@@ -32,7 +32,7 @@ export default function Home() {
             arrows: false,
             pagination: false,
             drag: 'free',
-            gap: '1em,',
+            gap: '3em,',
           }}
         >
           {spots.map((spot) => (
