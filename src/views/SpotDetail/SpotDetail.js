@@ -26,6 +26,25 @@ export default function SpotDetail() {
     };
     fetchData();
   }, [id]);
+  
+  useEffect(() => {
+    
+    async function isAvailable() {
+      const data = await mostRecent(spot.id);
+      console.log((data.end_time !== null));
+      return (data.end_time !== null);
+    }
+    
+    const availabilityFunction = async () => {
+      try {
+        const resp = await isAvailable();
+        setAvailable(resp);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    availabilityFunction();
+  }, [spot.id]);
 
   const onReserve = async () => {
     const resp = await newReservation(id, getUserId());   
@@ -37,18 +56,13 @@ export default function SpotDetail() {
     await endReservation(data.id);
   };
 
-  const isAvailable = async () => {
-    const data = await mostRecent(spot.id);
-    console.log((data.end_time !== null));
-    return (data.end_time !== null);
-  };
 
   // if (loading) return <h1>Loading Details<h1/>;
 
   return (
     <div className="SpotDetails">
       {error && <p>{error}</p>}
-
+      <h1>{available}</h1>
       <div key={spot.id}>
         {/* <img src = placeholder/> */}
         <p>{spot.name}</p>
@@ -59,7 +73,7 @@ export default function SpotDetail() {
       </div>
 
 
-      {isAvailable() && <button onClick={onReserve}>Reserve Spot</button>}
+      {available ? <button onClick={onReserve}>Reserve Spot</button> : ''}
 
       <button onClick={returnSpot}>Return Spot</button>
 
