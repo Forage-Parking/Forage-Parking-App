@@ -14,6 +14,7 @@ export default function Profile({ currentUser }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const [profiles, setProfiles] = useState([]);
@@ -43,6 +44,7 @@ export default function Profile({ currentUser }) {
         first_name: firstName,
         last_name: lastName,
         username: username,
+        email: email,
         image: avatar_Url,
       };
       let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
@@ -87,6 +89,7 @@ export default function Profile({ currentUser }) {
           setFirstName,
           setLastName,
           setUsername,
+          setEmail,
           handleSubmit,
         }}
       />
