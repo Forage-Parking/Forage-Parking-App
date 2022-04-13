@@ -32,7 +32,14 @@ export default function SpotDetail() {
   // if (loading) return <h1>Loading Details</h1>;
 
   const onReserve = () => {};
-  const returnSpot = () => {};
+  const returnSpot = async () => {
+    // get most reservation by spot
+    // update end_time - endReservation()
+    // update available
+    const recent = await mostRecent(spot.id);
+    const resData = await endReservation(recent.id);
+    setAvailable(true);
+  };
 
   return (
     <div className="SpotDetails">
