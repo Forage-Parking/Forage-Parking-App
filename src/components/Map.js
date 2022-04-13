@@ -3,7 +3,6 @@ import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { fetchSpots } from '../services/fetch';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN;
 
 export default function Map({ spots }) {
@@ -21,11 +20,10 @@ export default function Map({ spots }) {
       zoom: zoom,
     });
     spots.map((spot) => {
-      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`<p>${spot.details}</p>`);
-      new mapboxgl.Marker()
-        .setLngLat([spot.longitutue, spot.lattitude])
-        .setPopup(popup)
-        .addTo(map.current);
+      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<a href=/spots/detail/${spot.id}>${spot.details}</a>`
+      );
+      new mapboxgl.Marker().setLngLat([spot.lng, spot.lat]).setPopup(popup).addTo(map.current);
     });
   });
   useEffect(() => {
