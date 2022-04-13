@@ -28,3 +28,8 @@ export async function logout() {
   const response = await client.auth.signOut();
   return checkError(response);
 }
+
+export async function fetchSignedUrl(x) {
+  const resp = await client.storage.from('mybucket').createSignedUrl(x);
+  return checkError(resp);
+}
