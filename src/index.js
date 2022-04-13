@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { BasicProvider } from './context/BasicContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BasicProvider>
+      <App />
+    </BasicProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
