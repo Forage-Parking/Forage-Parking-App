@@ -13,13 +13,26 @@ export default function SpotDetail() {
   const history = useHistory();
   const [available, setAvailable] = useState('');
 
-// load the spot by unique id 
-// load the most recent reservation 
-// two buttons reserver spot if end_time in true and return spot if false 
-// setState available true/false depending on end_time of most recent reservation 
-// 
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchSpotById(id);
+      setSpot(data);
+
+      const recent = await mostRecent(id);
+      setAvailable(recent.end_time ? true : false);
+    };
+    getData();
+  }, [id]);
+  // load the spot by unique id
+  // load the most recent reservation
+  // two buttons reserver spot if end_time in true and return spot if false
+  // setState available true/false depending on end_time of most recent reservation
+  //
 
   // if (loading) return <h1>Loading Details</h1>;
+
+  const onReserve = () => {};
+  const returnSpot = () => {};
 
   return (
     <div className="SpotDetails">
@@ -34,10 +47,11 @@ export default function SpotDetail() {
         {/* <p>{spot.available}</p> */}
       </div>
 
-
-      {available ? <button onClick={onReserve}>Reserve Spot</button> : ''}
-
-      <button onClick={returnSpot}>Return Spot</button>
+      {available ? (
+        <button onClick={onReserve}>Reserve Spot</button>
+      ) : (
+        <button onClick={returnSpot}>Return Spot</button>
+      )}
 
       {/* <div>
         <Map />
