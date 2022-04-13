@@ -42,6 +42,11 @@ export async function endReservation(id) {
   return checkError(resp);
 }
 
+export async function fetchProfileByUserId(id) {
+  const resp = await client.from('profiles').select().match({ user_id: id }).single();
+  return checkError(resp);
+}
+
 export async function mostRecent(spot_id) {
   const resp = await client
     .from('reservations')
