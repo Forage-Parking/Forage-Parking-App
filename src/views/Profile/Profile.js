@@ -24,7 +24,6 @@ export default function Profile() {
     fetchUrl();
   }, [avatarUrl]);
 
-  // const [avatar_url, setAvatar_Url] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,8 +34,7 @@ export default function Profile() {
         user_id: user,
         first_name: firstName,
         last_name: lastName,
-        user_name: username,
-
+        username: username,
         image: avatar_Url,
       };
       let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
@@ -60,6 +58,7 @@ export default function Profile() {
           setFirstName,
           setLastName,
           setUsername,
+          handleSubmit,
         }}
       />
       <div>
