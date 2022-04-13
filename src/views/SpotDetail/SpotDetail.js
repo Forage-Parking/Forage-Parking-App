@@ -12,43 +12,49 @@ export default function SpotDetail() {
   const { id } = useParams();
   const history = useHistory();
   const [available, setAvailable] = useState('');
+  const [recentRes, setRecentRes] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
+    const getData = async () => {
+      const data = await fetchSpotById(id);
+      setSpot(data);
 
-        const resp = await fetchSpotById(id);
-        setSpot(resp);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-      }
+      const recent = await mostRecent(id);
+      setRecentRes(recent);
+      setAvailable(recent.end_time ? true : false);
     };
-    fetchData();
+    getData();
   }, [id]);
+  // load the spot by unique id
+  // load the most recent reservation
+  // two buttons reserver spot if end_time in true and return spot if false
+  // setState available true/false depending on end_time of most recent reservation
+  //
+
+  // if (loading) return <h1>Loading Details</h1>;
 
   const onReserve = async () => {
-    const resp = await newReservation(id, getUserId());   
+    // create a new reservation newReservation(spot_id, renter_id)
+    // update available
+    const newRes = await newReservation(spot.id, getUserId());
+    setAvailable(false);
+    setRecentRes(newRes);
   };
 
   const returnSpot = async () => {
-    // await endReservation();
-    const data = await mostRecent(spot.id);
-    await endReservation(data.id);
+    // get most reservation by spot
+    // update end_time - endReservation()
+    // update available
+    const recent = await mostRecent(spot.id);
+    const resData = await endReservation(recent.id);
+    setAvailable(true);
+    setRecentRes(resData);
   };
-
-  const isAvailable = async () => {
-    const data = await mostRecent(spot.id);
-    console.log((data.end_time !== null));
-    return (data.end_time !== null);
-  };
-
-  // if (loading) return <h1>Loading Details<h1/>;
 
   return (
     <div className="SpotDetails">
       {error && <p>{error}</p>}
-
+      <h1>{available}</h1>
       <div key={spot.id}>
         {/* <img src = placeholder/> */}
         <p>{spot.name}</p>
@@ -58,10 +64,10 @@ export default function SpotDetail() {
         {/* <p>{spot.available}</p> */}
       </div>
 
-
-      {isAvailable() && <button onClick={onReserve}>Reserve Spot</button>}
-
-      <button onClick={returnSpot}>Return Spot</button>
+      {available && <button onClick={onReserve}>Reserve Spot</button>}
+      {!available && getUserId() === recentRes.renter_id && (
+        <button onClick={returnSpot}>Return Spot</button>
+      )}
 
       {/* <div>
         <Map />
