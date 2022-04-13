@@ -3,9 +3,11 @@ import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { fetchProfileById } from '../../services/fetch';
+import { Link } from 'react-router-dom';
 
-export default function Profile() {
+export default function Profile({ currentUser }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar_Url, setAvatar_Url] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -13,6 +15,10 @@ export default function Profile() {
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [profile, setProfile] = useState([]);
+
+  const params = useParams();
+  const id = params.id;
   // const [profile_image, setProfile_image] = useState('');
 
   const user = getUserId();
@@ -51,6 +57,15 @@ export default function Profile() {
   };
   loading && 'loading';
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchProfileById(id);
+
+      setProfile(data);
+    };
+    fetchData();
+  }, [id]);
+
   return (
     <div>
       <ProfileForm
@@ -61,6 +76,7 @@ export default function Profile() {
           handleSubmit,
         }}
       />
+
       <div>
         <Upload
           url={avatarUrl}
@@ -69,6 +85,16 @@ export default function Profile() {
             setAvatarUrl(url);
           }}
         />
+      </div>
+
+      <div>
+        <p>{profile.first_name}</p>
+        <p>{profile.last_name}</p>
+        <p>{profile.username}</p>
+        <img src={profile.image} />
+        <p className="edit-link">
+          {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
+        </p>
       </div>
     </div>
   );
