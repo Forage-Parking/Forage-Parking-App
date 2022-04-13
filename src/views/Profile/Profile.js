@@ -1,5 +1,14 @@
 import React from 'react';
+import ProfileForm from '../../components/ProfileForm/ProfileForm';
 
 export default function Profile() {
-  return <div>Profile</div>;
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+
+  return (
+    <div>
+      <ProfileForm />
+    </div>
+  );
 }
