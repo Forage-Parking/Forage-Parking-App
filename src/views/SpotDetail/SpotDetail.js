@@ -68,6 +68,7 @@ export default function SpotDetail() {
       {!available && getUserId() === recentRes.renter_id && (
         <button onClick={returnSpot}>Return Spot</button>
       )}
+      {!available && getUserId() !== recentRes.renter_id && <p>This Spot is Unavailable. Please Try Another Spot</p>}
 
       {/* <div>
         <Map />
