@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProfileForm.css';
 
 export default function ProfileForm({ setFirstName, setLastName, setUsername, handleSubmit }) {
