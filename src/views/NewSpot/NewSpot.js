@@ -79,6 +79,7 @@ export default function NewSpot() {
         created_at: new Date(),
         owner_id: user,
         details: details,
+        size: size,
         price: price,
         image: avatar_Url,
         name: nickname,
