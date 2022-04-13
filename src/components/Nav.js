@@ -11,7 +11,7 @@ function Nav() {
   const user = getUserId();
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchProfileByUserId(user.id);
+      const data = await fetchProfileByUserId(user);
       setProfile(data);
     };
     fetchData();
