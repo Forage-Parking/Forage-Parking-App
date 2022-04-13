@@ -28,7 +28,7 @@ export default function SpotForm({
         <option value="20">$20/hr</option>
       </select>
       <label htmlFor="size">Spot Size</label>
-      <select name="price" onChange={(e) => setSize(e.target.value)}>
+      <select name="size" onChange={(e) => setSize(e.target.value)}>
         <option value="compact">compact</option>
         <option value="medium">medium</option>
         <option value="large">large</option>
