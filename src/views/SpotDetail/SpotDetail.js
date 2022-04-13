@@ -13,51 +13,13 @@ export default function SpotDetail() {
   const history = useHistory();
   const [available, setAvailable] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
+// load the spot by unique id 
+// load the most recent reservation 
+// two buttons reserver spot if end_time in true and return spot if false 
+// setState available true/false depending on end_time of most recent reservation 
+// 
 
-        const resp = await fetchSpotById(id);
-        setSpot(resp);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchData();
-  }, [id]);
-  
-  useEffect(() => {
-    
-    async function isAvailable() {
-      const data = await mostRecent(spot.id);
-      console.log((data.end_time !== null));
-      return (data.end_time !== null);
-    }
-    
-    const availabilityFunction = async () => {
-      try {
-        const resp = await isAvailable();
-        setAvailable(resp);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    availabilityFunction();
-  }, [spot.id]);
-
-  const onReserve = async () => {
-    const resp = await newReservation(id, getUserId());   
-  };
-
-  const returnSpot = async () => {
-    // await endReservation();
-    const data = await mostRecent(spot.id);
-    await endReservation(data.id);
-  };
-
-
-  // if (loading) return <h1>Loading Details<h1/>;
+  // if (loading) return <h1>Loading Details</h1>;
 
   return (
     <div className="SpotDetails">
