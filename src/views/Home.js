@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import { Link } from 'react-router-dom';
+import { IoLockOpen } from 'react-icons/io5';
 
 export default function Home() {
   const [spots, setSpots] = useState([]);
@@ -30,6 +31,7 @@ export default function Home() {
         <Splide
           options={{
             perPage: 1,
+            type: 'loop',
             arrows: false,
             pagination: false,
             drag: 'free',

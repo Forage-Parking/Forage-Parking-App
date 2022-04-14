@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getUser, logout } from '../services/auth';
 
 const BasicContext = createContext();
@@ -6,6 +7,7 @@ const BasicContext = createContext();
 const BasicProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(getUser());
+  const history = useHistory();
 
   const handleLogout = async () => {
     await logout();
@@ -21,6 +23,7 @@ const BasicProvider = ({ children }) => {
         currentUser,
         setCurrentUser,
         handleLogout,
+        history,
         ///
       }}
     >
