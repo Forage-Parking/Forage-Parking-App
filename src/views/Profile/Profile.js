@@ -68,7 +68,7 @@ export default function Profile() {
   }, [userId]);
 
   const editBtn = async () => {
-    setClicked(true);
+    {clicked ? setClicked(false) : setClicked(true);}
   };
 
   const handleSubmit = async (e) => {
