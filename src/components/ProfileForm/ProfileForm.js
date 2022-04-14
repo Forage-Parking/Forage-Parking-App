@@ -38,6 +38,7 @@ export default function ProfileForm({
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+      <label>Email</label>
       <input
         type="email"
         name="email"

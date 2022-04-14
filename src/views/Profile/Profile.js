@@ -40,8 +40,8 @@ export default function Profile() {
       const data1 = await fetchProfileById(id);
 
       // setProfileDetails(data1);
-      setFirstName(data1.firstName);
-      setLastName(data1.lastName);
+      setFirstName(data1.first_name);
+      setLastName(data1.last_name);
       setUsername(data1.username);
       setEmail(data1.email);
       setAvatarUrl(data1.image);
@@ -88,6 +88,7 @@ export default function Profile() {
         <p>{firstName}</p>
         <p>{lastName}</p>
         <p>{username}</p>
+        <p>{email}</p>
         <img src={avatarUrl} />
         {/* <div className="edit-link">
           {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
