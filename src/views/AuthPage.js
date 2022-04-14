@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { signInUser, signupUser } from '../services/auth';
 import Auth from '../components/Auth';
-import { useHistory } from 'react-router-dom';
+import { useBasicContext } from '../context/BasicContext';
 
 function AuthPage({ setCurrentUser }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [type, setType] = useState('sign-in');
-  const [username, setUsername] = useState('');
+  const { username,
+    error,
+    password,
+    email,
+    setError,
+    history } = useBasicContext();
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,23 +33,11 @@ function AuthPage({ setCurrentUser }) {
         setError(e.message);
       }
   };
+  
   return (
     <div>
       {error && <p>{error}</p>}
-      <Auth
-        {...{
-          username,
-          setUsername,
-          error,
-          password,
-          email,
-          setEmail,
-          setPassword,
-          handleSubmit,
-          type,
-          setType,
-        }}
-      />
+      <Auth {...{ handleSubmit }}/>
     </div>
   );
 }

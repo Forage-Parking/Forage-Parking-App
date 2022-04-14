@@ -7,23 +7,34 @@ const BasicContext = createContext();
 const BasicProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(getUser());
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [type, setType] = useState('sign-in');
+  const [username, setUsername] = useState('');
   const history = useHistory();
 
-  const handleLogout = async () => {
-    await logout();
-    setCurrentUser('');
-  };
+ 
 
   return (
     <BasicContext.Provider
       value={{
-        //loading state/ currentUser check
+        //loading state/ currentUser check/Auth
+        email, 
+        setEmail,
         loading,
         setLoading,
         currentUser,
         setCurrentUser,
-        handleLogout,
         history,
+        password, 
+        setPassword,
+        error, 
+        setError,
+        type, 
+        setType,
+        username, 
+        setUsername,
         ///
       }}
     >
