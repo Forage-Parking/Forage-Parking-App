@@ -13,6 +13,12 @@ const SpotProvider = ({ children }) => {
   const [price, setPrice] = useState('5');
   const [loading, setLoading] = useState(false);
 
+  const [spot, setSpot] = useState('');
+  const [error, setError] = useState('');
+
+  const [available, setAvailable] = useState(false);
+  const [recentRes, setRecentRes] = useState({});
+
 
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
@@ -45,7 +51,15 @@ const SpotProvider = ({ children }) => {
       setLng,
       zoom, 
       setZoom,
-      user,
+      user, 
+      available, 
+      setAvailable, 
+      recentRes, 
+      setRecentRes,
+      error, 
+      setError, 
+      spot, 
+      setSpot,
     }}>
       {children}
     </SpotContext.Provider>
