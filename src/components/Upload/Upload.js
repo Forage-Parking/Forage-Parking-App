@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { client } from '../../services/client';
 import VisuallyHidden from '@reach/visually-hidden';
+import { FileInput, FormField } from 'grommet';
 
 export default function Upload({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -53,17 +54,19 @@ export default function Upload({ url, size, onUpload }) {
 
   return (
     <div style={{ width: size }} aria-live="polite">
-      <img
-        src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
-        alt={avatarUrl ? 'image' : 'No image'}
-        className="avatar image"
-        style={{ height: size, width: size }}
-      />
+      {avatarUrl && (
+        <img
+          src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
+          alt={avatarUrl ? 'image' : 'No image'}
+          className="avatar image"
+          style={{ height: size, width: size }}
+        />
+      )}
       {uploading ? (
         'Uploading...'
       ) : (
-        <>
-          <label className="button primary block" htmlFor="single">
+        <FormField>
+          {/* <label className="button primary block" htmlFor="single">
             Upload an image
           </label>
           <VisuallyHidden>
@@ -74,8 +77,9 @@ export default function Upload({ url, size, onUpload }) {
               onChange={uploadAvatar}
               disabled={uploading}
             />
-          </VisuallyHidden>
-        </>
+          </VisuallyHidden> */}
+          <FileInput name="file" onChange={uploadAvatar} />
+        </FormField>
       )}
     </div>
   );

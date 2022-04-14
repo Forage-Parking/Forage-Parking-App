@@ -36,8 +36,8 @@ export default function SpotForm({ setSize, setDetails, setNickname, setPrice, h
             <TextArea name="details" onChange={(e) => setDetails(e.target.value)} />
           </FormField>
           <Box direction="row" justify="between" margin={{ top: 'medium' }}>
-            <Button type="submit" label="Save Spot" />
             <Button type="reset" label="Reset form" />
+            <Button type="submit" label="Save Spot" />
           </Box>
         </Form>
       </Box>

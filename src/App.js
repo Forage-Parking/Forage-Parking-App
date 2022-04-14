@@ -25,7 +25,6 @@ function App() {
           <Route exact path="/">
             {currentUser ? <Home /> : <Redirect to="/auth" />}
           </Route>
-
           <Route exact path="/spots/detail/:id">
             {currentUser ? <SpotDetail /> : <Redirect to="/auth" />}
           </Route>

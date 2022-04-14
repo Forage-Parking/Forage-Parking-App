@@ -106,6 +106,13 @@ export default function NewSpot() {
         <Container>
           <Smap ref={mapContainer} />
         </Container>
+        <Upload
+          url={avatarUrl}
+          size={150}
+          onUpload={(url) => {
+            setAvatarUrl(url);
+          }}
+        />
         <SpotForm
           {...{
             setSize,
@@ -116,15 +123,7 @@ export default function NewSpot() {
           }}
         />
       </div>
-      <div>
-        <Upload
-          url={avatarUrl}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-          }}
-        />
-      </div>
+      <div></div>
     </>
   );
 }
