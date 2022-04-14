@@ -6,7 +6,6 @@ import { IoLeafOutline } from 'react-icons/io5';
 import { fetchProfileByUserId } from '../services/fetch';
 import { getUserId, logout } from '../services/auth';
 import { useBasicContext } from '../context/BasicContext';
-import { useParams } from 'react-router-dom';
 
 function Nav() {
   const [profile, setProfile] = useState({});

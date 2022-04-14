@@ -71,7 +71,6 @@ export default function SpotDetail() {
         <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
       </div>
-
       {available && <button onClick={onReserve}>Reserve Spot</button>}
       {recentRes.renter_id && !available && getUserId() === recentRes.renter_id && (
         <button onClick={returnSpot}>Return Spot</button>
