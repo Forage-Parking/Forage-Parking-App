@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { client } from '../../services/client';
-import VisuallyHidden from '@reach/visually-hidden';
-import { FileInput, FormField } from 'grommet';
+import { FileInput, FormField, Form } from 'grommet';
 
-export default function Upload({ url, size, onUpload }) {
+export default function Upload({ url, sizeW, sizeH, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -53,13 +52,13 @@ export default function Upload({ url, size, onUpload }) {
   };
 
   return (
-    <div style={{ width: size }} aria-live="polite">
+    <Form>
       {avatarUrl && (
         <img
-          src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
+          src={avatarUrl ? avatarUrl : `https://place-hold.it/${sizeW}x${sizeH}`}
           alt={avatarUrl ? 'image' : 'No image'}
           className="avatar image"
-          style={{ height: size, width: size }}
+          style={{ height: sizeH, width: sizeW }}
         />
       )}
       {uploading ? (
@@ -78,9 +77,9 @@ export default function Upload({ url, size, onUpload }) {
               disabled={uploading}
             />
           </VisuallyHidden> */}
-          <FileInput name="file" onChange={uploadAvatar} />
+          {!avatarUrl && <FileInput name="file" onChange={uploadAvatar} />}
         </FormField>
       )}
-    </div>
+    </Form>
   );
 }

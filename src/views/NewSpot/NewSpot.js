@@ -108,7 +108,8 @@ export default function NewSpot() {
         </Container>
         <Upload
           url={avatarUrl}
-          size={150}
+          sizeW={400}
+          sizeH={400}
           onUpload={(url) => {
             setAvatarUrl(url);
           }}
