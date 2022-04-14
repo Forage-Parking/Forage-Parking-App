@@ -51,3 +51,8 @@ export async function mostRecent(spot_id) {
     .limit(1);
   return checkError(resp);
 }
+
+export async function updateProfile(profile) {
+  const resp = await client.from('profiles').update(profile).match({ id: profile.id });
+  return checkError(resp);
+}
