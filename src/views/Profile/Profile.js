@@ -18,6 +18,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const [profileDetails, setProfileDetails] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const params = useParams();
   const id = params.id;
@@ -69,6 +70,9 @@ export default function Profile() {
     };
     fetchData();
   }, [id]);
+  const editBtn = async () => {
+    setClicked(true);
+  };
 
   return (
     <>
@@ -81,8 +85,9 @@ export default function Profile() {
           {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
         </div> */}
       </div>
-
+      <button onClick={editBtn}>Edit</button>
       <div>
+        {clicked &&
         <ProfileForm
           {...{
             setFirstName,
@@ -92,8 +97,10 @@ export default function Profile() {
             handleSubmit,
           }}
         />
+        }
       </div>
       <div>
+        {clicked &&
         <Upload
           url={avatarUrl}
           size={150}
@@ -101,6 +108,7 @@ export default function Profile() {
             setAvatarUrl(url);
           }}
         />
+        }
       </div>
     </>
   );
