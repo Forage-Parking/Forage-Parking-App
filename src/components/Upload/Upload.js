@@ -64,21 +64,7 @@ export default function Upload({ url, sizeW, sizeH, onUpload }) {
       {uploading ? (
         'Uploading...'
       ) : (
-        <FormField>
-          {/* <label className="button primary block" htmlFor="single">
-            Upload an image
-          </label>
-          <VisuallyHidden>
-            <input
-              type="file"
-              id="single"
-              accept="image/*"
-              onChange={uploadAvatar}
-              disabled={uploading}
-            />
-          </VisuallyHidden> */}
-          {!avatarUrl && <FileInput name="file" onChange={uploadAvatar} />}
-        </FormField>
+        <FormField>{!avatarUrl && <FileInput name="file" onChange={uploadAvatar} />}</FormField>
       )}
     </Form>
   );
