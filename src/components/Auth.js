@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 import { Form, Box, FormField, TextInput, Button } from 'grommet';
 
-function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, type }) {
+function Auth({
+  password,
+  email,
+  setEmail,
+  setPassword,
+  handleSubmit,
+  setType,
+  type,
+  setUsername,
+  username,
+}) {
   return (
     <Box>
       <Box>
@@ -23,12 +33,15 @@ function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, t
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormField>
-          {/* <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          /> */}
+          {type === 'sign-up' && (
+            <FormField>
+              <TextInput
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FormField>
+          )}
           <FormField>
             <TextInput
               type="password"
@@ -37,12 +50,6 @@ function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, t
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormField>
-          {/* <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
           <Button type="submit" label={type === 'sign-in' ? 'Sign In' : 'Go'} />
         </Form>
       </Box>
