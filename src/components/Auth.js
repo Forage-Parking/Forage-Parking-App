@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { Form, Box, FormField, TextInput, Button } from 'grommet';
 
 function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, type }) {
   return (
-    <>
-      <div>
+    <Box>
+      <Box>
         <H4>
           <span className={type === 'sign-in' ? 'in' : ''} onClick={() => setType('sign-in')}>
             Sign In
@@ -13,23 +14,39 @@ function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, t
             Sign Up
           </span>
         </H4>
-        <form action="" onSubmit={handleSubmit}>
-          <input
+        <Form action="" onSubmit={handleSubmit}>
+          <FormField>
+            <TextInput
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormField>
+          {/* <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
+          /> */}
+          <FormField>
+            <TextInput
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormField>
+          {/* <input
             type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <button>Sign In</button>
-        </form>
-      </div>
-    </>
+          /> */}
+          <Button type="submit" label={type === 'sign-in' ? 'Sign In' : 'Go'} />
+        </Form>
+      </Box>
+    </Box>
   );
 }
 
