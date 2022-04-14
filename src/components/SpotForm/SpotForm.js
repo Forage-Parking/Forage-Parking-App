@@ -1,9 +1,11 @@
 import React from 'react';
 import './SpotForm.css';
 import { Box, Button, Form, FormField, Select, TextArea, TextInput } from 'grommet';
+import { useSpotContext } from '../../context/SpotContext';
 
 const suggestions = ['Ye ol Parking Spot'];
-export default function SpotForm({ setSize, setDetails, setNickname, setPrice, handleSubmit }) {
+export default function SpotForm({ handleSubmit }) {
+  const { setSize, setDetails, setNickname, setPrice, } = useSpotContext();
   return (
     <Box fill align="center" justify="center">
       <Box width="medium">

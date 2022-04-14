@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
@@ -9,21 +9,30 @@ import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import SpotFormV2 from '../../components/SpotForm/SpotFormV2';
+import { useSpotContext } from '../../context/SpotContext';
 
 export default function NewSpot() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [avatar_Url, setAvatar_Url] = useState(null);
-  const [size, setSize] = useState('compact');
-  const [details, setDetails] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [price, setPrice] = useState('5');
-  const [loading, setLoading] = useState(false);
+  const { 
+    avatarUrl, 
+    setAvatarUrl, 
+    avatar_Url, 
+    setAvatar_Url, 
+    size, 
+    details, 
+    nickname, 
+    price,  
+    loading, 
+    setLoading,
+    //Map Inof//
+    lat, 
+    setLat, 
+    lng, 
+    setLng,
+    zoom, 
+    setZoom } = useSpotContext();
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lat, setLat] = useState(45.523064);
-  const [lng, setLng] = useState(-122.676483);
-  const [zoom, setZoom] = useState(9);
   const history = useHistory();
 
   useEffect(() => {
@@ -115,13 +124,7 @@ export default function NewSpot() {
           }}
         />
         <SpotForm
-          {...{
-            setSize,
-            setDetails,
-            setNickname,
-            setPrice,
-            handleSubmit,
-          }}
+          {...{ handleSubmit }}
         />
       </div>
       <div></div>
