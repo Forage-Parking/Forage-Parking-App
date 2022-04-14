@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-
 import { endReservation, fetchSpotById, mostRecent, newReservation } from '../../services/fetch';
-
 import { getUserId } from '../../services/auth';
 
 export default function SpotDetail() {
