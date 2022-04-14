@@ -5,6 +5,7 @@ import Home from './views/Home';
 import { getUser } from './services/auth';
 import { useState } from 'react';
 import SpotDetail from './views/SpotDetail/SpotDetail';
+import styled from 'styled-components';
 
 import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
@@ -16,8 +17,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(user);
   return (
     <BrowserRouter>
-      <HeaderNav />
-      <div className="App">
+      <AppDiv className="App">
+        <HeaderNav />
         <Switch>
           <Route path="/auth">
             {!currentUser ? <AuthPage {...{ setCurrentUser }} /> : <Redirect to="/" />}
@@ -38,10 +39,16 @@ function App() {
             {currentUser ? <Profile /> : <Redirect to="/auth" />}
           </Route>
         </Switch>
-      </div>
+      </AppDiv>
     </BrowserRouter>
   );
 }
 
+const AppDiv = styled.div`
+  text-align: center;
+  color: #f4f1de;
+  background-color: #3d405b;
+  height: 100vh;
+`;
 //adding change for push//
 export default App;

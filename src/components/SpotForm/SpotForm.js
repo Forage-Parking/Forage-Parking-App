@@ -2,6 +2,7 @@ import React from 'react';
 import './SpotForm.css';
 import { Box, Button, Form, FormField, Select, TextArea, TextInput } from 'grommet';
 import { useSpotContext } from '../../context/SpotContext';
+import styled from 'styled-components';
 
 const suggestions = ['Ye ol Parking Spot'];
 export default function SpotForm({ handleSubmit }) {
@@ -38,15 +39,17 @@ export default function SpotForm({ handleSubmit }) {
             <TextArea name="details" onChange={(e) => setDetails(e.target.value)} />
           </FormField>
           <Box direction="row" justify="between" margin={{ top: 'medium' }}>
-            <Button type="reset" label="Reset form" />
-            <Button type="submit" label="Save Spot" />
+            <ButtonColor type="reset" label="Reset form" />
+            <ButtonColor type="submit" label="Save Spot" />
           </Box>
         </Form>
       </Box>
     </Box>
   );
 }
-
+const ButtonColor = styled(Button)`
+  color: #f4f1de;
+`;
 // const StyledSelect = styled.select`
 /* width: 100vw;
 `; */
