@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
-import { client } from '../../services/client';
+
 import { useHistory, useParams } from 'react-router-dom';
-import { fetchProfileById } from '../../services/fetch';
+import { fetchProfileById, updateProfile } from '../../services/fetch';
 
 import './Profile.css';
 
@@ -19,6 +19,7 @@ export default function Profile() {
   const history = useHistory();
   const [profileDetails, setProfileDetails] = useState([]);
   const [clicked, setClicked] = useState(false);
+  const [error, setError] = useState('');
 
   const params = useParams();
   const id = params.id;
@@ -26,13 +27,29 @@ export default function Profile() {
 
   const user = getUserId();
 
+  // useEffect(() => {
+  //   const fetchUrl = async () => {
+  //     const data = await fetchSignedUrl(avatarUrl);
+  //     setAvatar_Url(data.signedURL);
+  //   };
+  //   fetchUrl();
+  // }, [avatarUrl]);
+
   useEffect(() => {
-    const fetchUrl = async () => {
-      const data = await fetchSignedUrl(avatarUrl);
-      setAvatar_Url(data.signedURL);
+    const fetchData = async () => {
+      const data1 = await fetchProfileById(id);
+
+      // setProfileDetails(data1);
+      setFirstName(data1.firstName);
+      setLastName(data1.lastName);
+      setUsername(data1.username);
+      setEmail(data1.email);
     };
-    fetchUrl();
-  }, [avatarUrl]);
+    fetchData();
+  }, [id]);
+  const editBtn = async () => {
+    setClicked(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,15 +57,16 @@ export default function Profile() {
     try {
       setLoading(true);
       const updates = {
-        created_at: new Date(),
-        user_id: user,
+        // user_id: user,
         first_name: firstName,
         last_name: lastName,
         username: username,
         email: email,
         image: avatar_Url,
       };
-      let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
+      await updateProfile(updates);
+
+      // let { error } = await client.from('profiles').update(updates, { returning: 'minimal' });
 
       if (error) {
         throw error;
@@ -61,18 +79,6 @@ export default function Profile() {
     history.push('/');
   };
   loading && 'loading';
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data1 = await fetchProfileById(id);
-
-      setProfileDetails(data1);
-    };
-    fetchData();
-  }, [id]);
-  const editBtn = async () => {
-    setClicked(true);
-  };
 
   return (
     <>
@@ -87,29 +93,29 @@ export default function Profile() {
       </div>
       <button onClick={editBtn}>Edit</button>
       <div>
-        {clicked &&
-        <ProfileForm
-          {...{
-            setFirstName,
-            setLastName,
-            setUsername,
-            setEmail,
-            handleSubmit,
-          }}
-        />
-        }
+        {clicked && (
+          <ProfileForm
+            {...{
+              setFirstName,
+              setLastName,
+              setUsername,
+              setEmail,
+              handleSubmit,
+            }}
+          />
+        )}
       </div>
-      <div>
-        {clicked &&
-        <Upload
-          url={avatarUrl}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-          }}
-        />
-        }
-      </div>
+      {/* <div>
+        {clicked && (
+          <Upload
+            url={avatarUrl}
+            size={150}
+            onUpload={(url) => {
+              setAvatarUrl(url);
+            }}
+          /> */}
+      {/* )} */}
+      {/* {/* </div> */}
     </>
   );
 }

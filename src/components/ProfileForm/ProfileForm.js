@@ -7,6 +7,10 @@ export default function ProfileForm({
   setUsername,
   handleSubmit,
   setEmail,
+  firstName,
+  lastName,
+  username,
+  email,
 }) {
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
@@ -15,6 +19,7 @@ export default function ProfileForm({
         type="text"
         name="first_name"
         placeholder="First Name"
+        value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
       <label>Last Name</label>
@@ -22,6 +27,7 @@ export default function ProfileForm({
         type="text"
         name="last_name"
         placeholder="Last Name"
+        value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />
       <label>Username</label>
@@ -29,12 +35,14 @@ export default function ProfileForm({
         type="text"
         name="username"
         placeholder="Username"
+        value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="email"
         name="email"
         placeholder="Email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
