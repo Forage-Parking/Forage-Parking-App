@@ -46,7 +46,8 @@ function App() {
 
 const AppDiv = styled.div`
   text-align: center;
-  background-color: #f4f1de;
+  color: #f4f1de;
+  background-color: #3d405b;
   height: 100vh;
 `;
 //adding change for push//

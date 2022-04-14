@@ -20,7 +20,11 @@ function HeaderNav() {
 }
 
 const Logo = styled.span`
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
+  svg {
+    color: #81b29a;
+    transform: scale(-1, 1) rotate(90deg) translate(4px, -10%);
+  }
 `;
 export default HeaderNav;
