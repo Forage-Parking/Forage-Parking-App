@@ -78,7 +78,7 @@ export default function Profile() {
     } finally {
       setLoading(false);
     }
-    history.push('/');
+    alert('Successfully updated profile');
   };
   loading && 'loading';
 
