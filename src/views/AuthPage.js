@@ -4,8 +4,9 @@ import Auth from '../components/Auth';
 import { useBasicContext } from '../context/BasicContext';
 
 function AuthPage({ setCurrentUser }) {
-  const [type, setType] = useState('sign-in');
-  const { username,
+  // const [type, setType] = useState('sign-in');
+  const { username, 
+    type, 
     error,
     password,
     email,
