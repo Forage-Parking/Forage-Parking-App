@@ -5,29 +5,27 @@ import Home from './views/Home';
 import { getUser } from './services/auth';
 import { useState } from 'react';
 import SpotDetail from './views/SpotDetail/SpotDetail';
-import SpotSearch from './views/SpotSearch/SpotSearch';
+
 import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
 import Profile from './views/Profile/Profile';
-import Nav from './components/Nav';
+import HeaderNav from './components/HeaderNav';
 
 function App() {
   const user = getUser();
   const [currentUser, setCurrentUser] = useState(user);
   return (
     <BrowserRouter>
-      <Nav />
-      <Switch>
-        <div className="App">
+      <HeaderNav />
+      <div className="App">
+        <Switch>
           <Route path="/auth">
             {!currentUser ? <AuthPage {...{ setCurrentUser }} /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/">
             {currentUser ? <Home /> : <Redirect to="/auth" />}
           </Route>
-          <Route exact path="/spots/search">
-            {currentUser ? <SpotSearch /> : <Redirect to="/auth" />}
-          </Route>
+
           <Route exact path="/spots/detail/:id">
             {currentUser ? <SpotDetail /> : <Redirect to="/auth" />}
           </Route>
@@ -40,13 +38,8 @@ function App() {
           <Route exact path="/profile/:id">
             {currentUser ? <Profile /> : <Redirect to="/auth" />}
           </Route>
-
-          {/* //stretch goal// */}
-          {/* <Route exact path="/spots/:id/edit">
-            {currentUser ? <ProfileEdit /> : <Redirect to="/auth" />}
-          </Route> */}
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }

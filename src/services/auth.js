@@ -4,8 +4,13 @@ export function getUser() {
   return client.auth.session() && client.auth.session().user.email;
 }
 
-export async function signupUser(email, password) {
+export function getUserId() {
+  return client.auth.session() && client.auth.session().user.id;
+}
+
+export async function signupUser(email, password, username) {
   const { user, error } = await client.auth.signUp({ email, password });
+  await client.from('profiles').insert({ user_id: user.id, email: email, username: username });
   if (error) {
     throw error;
   }
@@ -23,4 +28,9 @@ export async function signInUser(email, password) {
 export async function logout() {
   const response = await client.auth.signOut();
   return checkError(response);
+}
+
+export async function fetchSignedUrl(x) {
+  const resp = await client.storage.from('mybucket').createSignedUrl(x, 315360000);
+  return checkError(resp);
 }

@@ -10,19 +10,64 @@ export async function newSpot(spot) {
   return checkError(resp);
 }
 
-//this needs a policy
-export async function createBucket() {
-  const resp = await client.storage.create('image', { public: false });
+export async function fetchSpotById(id) {
+  const resp = await client.from('parking-spots').select('*').match({ id }).single();
+
   return checkError(resp);
 }
 
-this needs a policy
-export async function uploadImage() {
-  const imageFile = event.target.files[0];
-  const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload('public/avatar1.png', imageFile, {
-      cacheControl: '3600',
-      upsert: false,
-    });
+export async function newReservation(spot_id, renter_id) {
+  const resp = await client
+    .from('reservations')
+    .insert([{ spot_id, renter_id: renter_id, start_time: new Date() }])
+    .single();
+  return checkError(resp);
+}
+export async function fetchProfiles() {
+  const resp = await client.from('profiles').select('*');
+  return checkError(resp);
+}
+
+export async function fetchProfileById(id) {
+  const resp = await client.from('profiles').select('*').match({ id }).single();
+  return checkError(resp);
+}
+
+export async function fetchProfileByUserId(id) {
+  const resp = await client.from('profiles').select().match({ user_id: id }).single();
+  return checkError(resp);
+}
+export async function endReservation(id) {
+  const resp = await client.from('reservations').update({ end_time: new Date() }).match({ id });
+  return checkError(resp);
+}
+
+export async function mostRecent(spot_id) {
+  const resp = await client
+    .from('reservations')
+    .select('*')
+    .order('start_time', { ascending: false })
+    .match({ spot_id })
+    .limit(1);
+  return checkError(resp);
+}
+
+export async function updateProfile(profile) {
+  const resp = await client.from('profiles').update(profile).match({ id: profile.id });
+  return checkError(resp);
+}
+
+export async function fetchSpotsByOwnerId(owner_id) {
+  const resp = await client.from('parking-spots').select('*').match({ owner_id });
+  return checkError(resp);
+}
+
+export async function deleteSpot(id) {
+  const resp = await client.from('parking-spots').delete().match({ id }).single();
+  return checkError(resp);
+}
+
+export async function deleteRes(id) {
+  const resp = await client.from('reservations').delete().match({ spot_id: id });
+  return checkError(resp);
 }

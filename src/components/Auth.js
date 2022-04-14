@@ -1,9 +1,20 @@
 import styled from 'styled-components';
+import { Form, Box, FormField, TextInput, Button } from 'grommet';
 
-function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, type }) {
+function Auth({
+  password,
+  email,
+  setEmail,
+  setPassword,
+  handleSubmit,
+  setType,
+  type,
+  setUsername,
+  username,
+}) {
   return (
-    <>
-      <div>
+    <Box>
+      <Box>
         <H4>
           <span className={type === 'sign-in' ? 'in' : ''} onClick={() => setType('sign-in')}>
             Sign In
@@ -13,23 +24,36 @@ function Auth({ password, email, setEmail, setPassword, handleSubmit, setType, t
             Sign Up
           </span>
         </H4>
-        <form action="" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button>Sign In</button>
-        </form>
-      </div>
-    </>
+        <Form action="" onSubmit={handleSubmit}>
+          <FormField>
+            <TextInput
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormField>
+          {type === 'sign-up' && (
+            <FormField>
+              <TextInput
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FormField>
+          )}
+          <FormField>
+            <TextInput
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormField>
+          <Button type="submit" label={type === 'sign-in' ? 'Sign In' : 'Go'} />
+        </Form>
+      </Box>
+    </Box>
   );
 }
 
@@ -38,10 +62,22 @@ const H4 = styled.h4`
   justify-content: space-around;
 
   .in {
-    text-decoration: underline;
+    padding: 20px 50px;
+    border: 3px solid #3c67e3;
+    border-radius: 10px;
+    animation: pulsate 3s, ease-in-out;
   }
   .out {
-    text-decoration: underline;
+    padding: 20px 50px;
+    border: 3px solid #3c67e3;
+    border-radius: 10px;
+    animation: pulsate 3s ease-in-out;
+  }
+
+  @keyframes pulsate {
+    0% {
+      box-shadow: 0 0 25px #5ddcff, 0 0 50px #4e00c2;
+    }
   }
 `;
 export default Auth;
