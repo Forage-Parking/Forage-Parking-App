@@ -27,21 +27,22 @@ function Nav() {
   };
 
   return (
-    <StyledList>
-      <StyledNavLink exact to="/">
-        <IoLeafOutline />
-        <h4>Home</h4>
-      </StyledNavLink>
+    <>
+      <Logout onClick={handleLogout}>logout</Logout>
+      <StyledList>
+        <StyledNavLink exact to="/">
+          <IoLeafOutline />
+          <h4>Home</h4>
+        </StyledNavLink>
 
-      <button onClick={handleLogout}>logout</button>
-
-      <StyledNavLink to={`/profile/${profile.id}`}>
-        <h4>Profile</h4>
-      </StyledNavLink>
-      <StyledNavLink to="/spots/new">
-        <h4>New Spot</h4>
-      </StyledNavLink>
-    </StyledList>
+        <StyledNavLink to={`/profile/${profile.id}`}>
+          <h4>Profile</h4>
+        </StyledNavLink>
+        <StyledNavLink to="/spots/new">
+          <h4>New Spot</h4>
+        </StyledNavLink>
+      </StyledList>
+    </>
   );
 }
 export const StyledList = styled.div`
@@ -75,7 +76,7 @@ export const StyledNavLink = styled(NavLink)`
     font-size: 1.5rem;
   }
   &.active {
-    background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+    background: #e07a5f;
 
     h4 {
       color: black;
@@ -84,6 +85,22 @@ export const StyledNavLink = styled(NavLink)`
       color: white;
     }
   }
+`;
+const Logout = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  text-decoration: none;
+  background: linear-gradient(35deg, #494949, #313131);
+  color: white;
+  width: 6rem;
+  height: 2rem;
+  cursor: pointer;
+  transform: scale(0.8);
+  z-index: 1000;
 `;
 
 export default Nav;

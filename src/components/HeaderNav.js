@@ -12,7 +12,7 @@ function HeaderNav() {
         <IoLeafOutline />
         ge
       </Logo>
-      <Header background="#f2cc8f" pad="small" justify="between">
+      <Header background="#81b29a" pad="small" justify="between">
         <Nav direction="row" />
       </Header>
     </>

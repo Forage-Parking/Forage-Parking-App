@@ -50,7 +50,7 @@ function Auth({
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormField>
-          <Button type="submit" label={type === 'sign-in' ? 'Sign In' : 'Go'} />
+          <ButtonColor type="submit" label={type === 'sign-in' ? 'Sign In' : 'Go'} />
         </Form>
       </Box>
     </Box>
@@ -60,6 +60,7 @@ function Auth({
 const H4 = styled.h4`
   display: flex;
   justify-content: space-around;
+  color: #f4f1de;
 
   .in {
     padding: 20px 50px;
@@ -79,5 +80,9 @@ const H4 = styled.h4`
       box-shadow: 0 0 25px #5ddcff, 0 0 50px #4e00c2;
     }
   }
+`;
+
+const ButtonColor = styled(Button)`
+  color: #f4f1de;
 `;
 export default Auth;
