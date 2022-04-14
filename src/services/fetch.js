@@ -56,3 +56,8 @@ export async function updateProfile(profile) {
   const resp = await client.from('profiles').update(profile).match({ id: profile.id });
   return checkError(resp);
 }
+
+export async function fetchSpotsByOwnerId(owner_id) {
+  const resp = await client.from('parking-spots').select('*').match({ owner_id });
+  return checkError(resp);
+}

@@ -4,7 +4,7 @@ import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 
 import { useHistory, useParams } from 'react-router-dom';
-import { fetchProfileById, updateProfile } from '../../services/fetch';
+import { fetchProfileById, fetchSpotsByOwnerId, updateProfile } from '../../services/fetch';
 
 import './Profile.css';
 
@@ -20,12 +20,14 @@ export default function Profile() {
   const [profileDetails, setProfileDetails] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [error, setError] = useState('');
+  const [spots, setSpots] = useState([]);
 
   const params = useParams();
   const id = params.id;
   // const [profile_image, setProfile_image] = useState('');
 
-  const user = getUserId();
+  const userId = getUserId();
+  console.log(userId);
 
   // useEffect(() => {
   //   const fetchUrl = async () => {
@@ -48,6 +50,17 @@ export default function Profile() {
     };
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data2 = await fetchSpotsByOwnerId(userId);
+      console.log(data2);
+
+      setSpots(data2);
+    };
+    fetchData();
+  }, [userId]);
+
   const editBtn = async () => {
     setClicked(true);
   };
@@ -112,6 +125,7 @@ export default function Profile() {
           />
         )}
       </div>
+
       {/* <div>
         {clicked && (
           <Upload
@@ -123,6 +137,15 @@ export default function Profile() {
           /> */}
       {/* )} */}
       {/* {/* </div> */}
+      <div>
+        {spots.map((spot) => (
+          <div key={spot.id}>
+            <p>{spot.name}</p>
+            <p>{spot.details}</p>
+            <img src={spot.image} />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
