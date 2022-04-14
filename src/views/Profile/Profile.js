@@ -10,7 +10,7 @@ import './Profile.css';
 
 export default function Profile() {
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [avatar_Url, setAvatar_Url] = useState(null);
+  // const [avatar_Url, setAvatar_Url] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -44,6 +44,7 @@ export default function Profile() {
       setLastName(data1.lastName);
       setUsername(data1.username);
       setEmail(data1.email);
+      setAvatarUrl(data1.image);
     };
     fetchData();
   }, [id]);
@@ -58,11 +59,12 @@ export default function Profile() {
       setLoading(true);
       const updates = {
         // user_id: user,
+        id: id,
         first_name: firstName,
         last_name: lastName,
         username: username,
         email: email,
-        image: avatar_Url,
+        image: avatarUrl,
       };
       await updateProfile(updates);
 
@@ -83,10 +85,10 @@ export default function Profile() {
   return (
     <>
       <div className="profile-details">
-        <p>{profileDetails.first_name}</p>
-        <p>{profileDetails.last_name}</p>
-        <p>{profileDetails.username}</p>
-        <img src={profileDetails.image} />
+        <p>{firstName}</p>
+        <p>{lastName}</p>
+        <p>{username}</p>
+        <img src={avatarUrl} />
         {/* <div className="edit-link">
           {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
         </div> */}
@@ -101,6 +103,10 @@ export default function Profile() {
               setUsername,
               setEmail,
               handleSubmit,
+              firstName,
+              lastName,
+              username,
+              email,
             }}
           />
         )}
