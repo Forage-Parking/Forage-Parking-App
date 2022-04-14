@@ -7,11 +7,12 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 export default function NewSpot() {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar_Url, setAvatar_Url] = useState(null);
-  const [size, setSize] = useState('');
+  const [size, setSize] = useState('compact');
   const [details, setDetails] = useState('');
   const [nickname, setNickname] = useState('');
   const [price, setPrice] = useState('5');
@@ -22,6 +23,7 @@ export default function NewSpot() {
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
   const [zoom, setZoom] = useState(9);
+  const history = useHistory();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -77,11 +79,12 @@ export default function NewSpot() {
         created_at: new Date(),
         owner_id: user,
         details: details,
+        size: size,
         price: price,
         image: avatar_Url,
-        Name: nickname,
-        lattitude: lat,
-        longitutue: lng,
+        name: nickname,
+        lat: lat,
+        lng: lng,
       };
       let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
 
@@ -93,6 +96,7 @@ export default function NewSpot() {
     } finally {
       setLoading(false);
     }
+    history.push('/');
   };
   loading && 'loading';
   return (
@@ -117,7 +121,6 @@ export default function NewSpot() {
           size={150}
           onUpload={(url) => {
             setAvatarUrl(url);
-            // updateProfile({ username, website, avatar_url: url });
           }}
         />
       </div>

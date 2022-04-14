@@ -10,6 +10,7 @@ export function getUserId() {
 
 export async function signupUser(email, password) {
   const { user, error } = await client.auth.signUp({ email, password });
+  await client.from('profiles').insert({ user_id: user.id, email: email, username: email });
   if (error) {
     throw error;
   }
@@ -30,6 +31,6 @@ export async function logout() {
 }
 
 export async function fetchSignedUrl(x) {
-  const resp = await client.storage.from('mybucket').createSignedUrl(x, 50000);
+  const resp = await client.storage.from('mybucket').createSignedUrl(x, 315360000);
   return checkError(resp);
 }

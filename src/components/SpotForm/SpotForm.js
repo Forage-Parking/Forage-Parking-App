@@ -5,7 +5,7 @@ export default function SpotForm({
   // setOwnerId,
   // setLat,
   // setLng,
-  // setSize,
+  setSize,
   setDetails,
   setNickname,
   setPrice,
@@ -26,6 +26,13 @@ export default function SpotForm({
         <option value="10">$10/hr</option>
         <option value="15">$15/hr</option>
         <option value="20">$20/hr</option>
+      </select>
+      <label htmlFor="size">Spot Size</label>
+      <select name="size" onChange={(e) => setSize(e.target.value)}>
+        <option value="compact">compact</option>
+        <option value="medium">medium</option>
+        <option value="large">large</option>
+        <option value="trailer">trailer</option>
       </select>
       <label htmlFor="details">Spot Description</label>
       <textarea
