@@ -9,14 +9,14 @@ import SpotDetail from './views/SpotDetail/SpotDetail';
 import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
 import Profile from './views/Profile/Profile';
-import Nav from './components/Nav';
+import HeaderNav from './components/HeaderNav';
 
 function App() {
   const user = getUser();
   const [currentUser, setCurrentUser] = useState(user);
   return (
     <BrowserRouter>
-      <Nav />
+      <HeaderNav />
       <div className="App">
         <Switch>
           <Route path="/auth">
