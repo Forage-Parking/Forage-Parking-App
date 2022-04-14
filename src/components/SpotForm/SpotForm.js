@@ -1,16 +1,12 @@
 import React from 'react';
+import { useSpotFormContext } from '../../context/SpotFormContext';
 import './SpotForm.css';
 
-export default function SpotForm({
-  // setOwnerId,
-  // setLat,
-  // setLng,
-  setSize,
-  setDetails,
-  setNickname,
-  setPrice,
-  handleSubmit,
-}) {
+export default function SpotForm({ handleSubmit }) 
+
+
+{
+  const { setDetails, setSize, setNickname, setPrice } = useSpotFormContext();
   return (
     <form className="spot-form" onSubmit={handleSubmit}>
       <label htmlFor="nickname">Enter a Nickname for Your Spot</label>

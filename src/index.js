@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { BasicProvider } from './context/BasicContext';
+import { SpotFormProvider } from './context/SpotFormContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BasicProvider>
-      <App />
-    </BasicProvider>
+    <SpotFormProvider>
+      <BasicProvider>
+        <App />
+      </BasicProvider>
+    </SpotFormProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

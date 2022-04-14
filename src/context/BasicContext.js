@@ -24,7 +24,7 @@ const BasicProvider = ({ children }) => {
         setCurrentUser,
         handleLogout,
         history,
-        ///
+        ///Nav
       }}
     >
       {children}

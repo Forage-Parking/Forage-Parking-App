@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
-import { fetchSignedUrl, getUserId } from '../../services/auth';
-import { client } from '../../services/client';
+import { fetchSignedUrl } from '../../services/auth';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useSpotFormContext } from '../../context/SpotFormContext';
 
 export default function NewSpot() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [avatar_Url, setAvatar_Url] = useState(null);
-  const [size, setSize] = useState('compact');
-  const [details, setDetails] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [price, setPrice] = useState('5');
-  const [loading, setLoading] = useState(false);
+  const { 
+    avatarUrl, 
+    setAvatarUrl, 
+    setAvatar_Url,
+    loading,
+    zoom, 
+    setZoom,
+    lng,
+    setLng,
+    lat,
+    setLat, } = useSpotFormContext();
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lat, setLat] = useState(45.523064);
-  const [lng, setLng] = useState(-122.676483);
-  const [zoom, setZoom] = useState(9);
-  const history = useHistory();
+
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -49,7 +49,7 @@ export default function NewSpot() {
     setLng(map.current.getCenter().lng.toFixed(4));
     setLat(map.current.getCenter().lat.toFixed(4));
     setZoom(map.current.getZoom().toFixed(2));
-  }, []);
+  }, [setLat, setLng, setZoom]);
 
   useEffect(() => {
     if (!map.current) return;
@@ -60,57 +60,21 @@ export default function NewSpot() {
     });
   });
 
-  const user = getUserId();
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
-  }, [avatarUrl]);
+  }, [avatarUrl, setAvatar_Url]);
 
   // const [avatar_url, setAvatar_Url] = useState(null);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      setLoading(true);
-      const updates = {
-        created_at: new Date(),
-        owner_id: user,
-        details: details,
-        size: size,
-        price: price,
-        image: avatar_Url,
-        name: nickname,
-        lat: lat,
-        lng: lng,
-      };
-      let { error } = await client.from('parking-spots').upsert(updates, { returning: 'minimal' });
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-    history.push('/');
-  };
   loading && 'loading';
   return (
     <>
       <div>
-        <SpotForm
-          {...{
-            setSize,
-            setDetails,
-            setNickname,
-            setPrice,
-            handleSubmit,
-          }}
-        />
+        <SpotForm />
       </div>
       <Container>
         <Smap ref={mapContainer} />
