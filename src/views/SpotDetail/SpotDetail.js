@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import Map from '../../components/Map';
+
 import { endReservation, fetchSpotById, mostRecent, newReservation } from '../../services/fetch';
-import { useBasicContext } from '../../context/BasicContext';
+
 import { getUserId } from '../../services/auth';
 
 export default function SpotDetail() {
@@ -44,7 +44,6 @@ export default function SpotDetail() {
     // create a new reservation newReservation(spot_id, renter_id)
     // update available
     const newRes = await newReservation(spot.id, getUserId());
-    console.log('newRes', newRes);
     setAvailable(false);
     setRecentRes(newRes);
     alert('You have reserved this spot.');
@@ -74,9 +73,6 @@ export default function SpotDetail() {
         <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
       </div>
-
-      {console.log('userId', getUserId())}
-      {console.log('renterId', recentRes.renter_id)}
       {available && <button onClick={onReserve}>Reserve Spot</button>}
       {recentRes.renter_id && !available && getUserId() === recentRes.renter_id && (
         <button onClick={returnSpot}>Return Spot</button>

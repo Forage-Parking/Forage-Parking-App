@@ -35,7 +35,6 @@ export async function fetchProfileById(id) {
 
 export async function fetchProfileByUserId(id) {
   const resp = await client.from('profiles').select().match({ user_id: id }).single();
-  console.log(resp);
   return checkError(resp);
 }
 export async function endReservation(id) {
