@@ -67,7 +67,7 @@ export default function Profile() {
       setSpots(data2);
     };
     fetchData();
-  }, [userId]);
+  }, [userId, setAvatar_Url]);
 
   const editBtn = async () => {
     setClicked(true);
@@ -75,6 +75,9 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const data = await fetchSignedUrl(avatarUrl);
+    setAvatar_Url(data.signedURL);
 
     try {
       setLoading(true);
@@ -85,7 +88,7 @@ export default function Profile() {
         last_name: lastName,
         username: username,
         email: email,
-        image: avatarUrl,
+        image: avatar_Url,
       };
       await updateProfile(updates);
 

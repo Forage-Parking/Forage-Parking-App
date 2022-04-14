@@ -62,6 +62,7 @@ export default function NewSpot() {
   });
 
   const user = getUserId();
+
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
