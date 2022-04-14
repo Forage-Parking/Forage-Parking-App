@@ -4,6 +4,7 @@ import { endReservation, fetchSpotById, mostRecent, newReservation } from '../..
 import { getUserId } from '../../services/auth';
 
 export default function SpotDetail() {
+  ///WORK HERE New Spot.js is done
   const [spot, setSpot] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');

@@ -5,7 +5,7 @@ import { useSpotContext } from '../../context/SpotContext';
 
 const suggestions = ['Ye ol Parking Spot'];
 export default function SpotForm({ handleSubmit }) {
-  const { setSize, setDetails, setNickname, setPrice, } = useSpotContext();
+  const { setSize, setDetails, setNickname, setPrice } = useSpotContext();
   return (
     <Box fill align="center" justify="center">
       <Box width="medium">

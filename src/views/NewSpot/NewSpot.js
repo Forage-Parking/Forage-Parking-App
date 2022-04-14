@@ -77,7 +77,7 @@ export default function NewSpot() {
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
-  }, [avatarUrl]);
+  }, [avatarUrl, setAvatar_Url]);
 
   // const [avatar_url, setAvatar_Url] = useState(null);
   const handleSubmit = async (e) => {

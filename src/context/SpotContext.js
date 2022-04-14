@@ -1,4 +1,7 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { fetchSignedUrl, getUserId } from '../services/auth';
+import { client } from '../services/client';
 
 const SpotContext = createContext();
 
@@ -11,10 +14,14 @@ const SpotProvider = ({ children }) => {
   const [nickname, setNickname] = useState('');
   const [price, setPrice] = useState('5');
   const [loading, setLoading] = useState(false);
+  const user = getUserId();
 
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
   const [zoom, setZoom] = useState(9);
+
+
+
     
   return (
     <SpotContext.Provider value={{ 
@@ -38,7 +45,8 @@ const SpotProvider = ({ children }) => {
       lng, 
       setLng,
       zoom, 
-      setZoom
+      setZoom,
+      user,
     }}>
       {children}
     </SpotContext.Provider>
