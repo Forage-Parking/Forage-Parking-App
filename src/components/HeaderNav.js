@@ -12,11 +12,7 @@ function HeaderNav() {
         <IoLeafOutline />
         ge
       </Logo>
-      <Header
-        background="linear-gradient(to right, #c9d6bb, #e4e4e4)"
-        pad="small"
-        justify="between"
-      >
+      <Header background="#f2cc8f" pad="small" justify="between">
         <Nav direction="row" />
       </Header>
     </>
