@@ -3,8 +3,14 @@ import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 
-import { useHistory, useParams } from 'react-router-dom';
-import { fetchProfileById, fetchSpotsByOwnerId, updateProfile } from '../../services/fetch';
+import { useParams } from 'react-router-dom';
+import {
+  fetchProfileById,
+  fetchSpotsByOwnerId,
+  updateProfile,
+  deleteRes,
+  deleteSpot,
+} from '../../services/fetch';
 
 import './Profile.css';
 
@@ -16,7 +22,7 @@ export default function Profile() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+
   const [profileDetails, setProfileDetails] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [error, setError] = useState('');
@@ -95,6 +101,14 @@ export default function Profile() {
   };
   loading && 'loading';
 
+  const handleDelete = async (spot_id) => {
+    await deleteRes(spot_id);
+    await deleteSpot(spot_id);
+
+    const resp = await fetchSpotsByOwnerId(userId);
+    setSpots(resp);
+  };
+
   return (
     <>
       <div className="profile-details">
@@ -143,6 +157,7 @@ export default function Profile() {
             <p>{spot.name}</p>
             <p>{spot.details}</p>
             <img src={spot.image} />
+            <button onClick={() => handleDelete(spot.id)}>Delete</button>
           </div>
         ))}
       </div>
