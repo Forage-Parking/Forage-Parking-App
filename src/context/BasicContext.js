@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getUser, logout } from '../services/auth';
+import { getUser } from '../services/auth';
 
 const BasicContext = createContext();
 
@@ -19,7 +19,7 @@ const BasicProvider = ({ children }) => {
   return (
     <BasicContext.Provider
       value={{
-        //loading state/ currentUser check/Auth
+        //loading state/currentUser check/AuthStuff
         email, 
         setEmail,
         loading,

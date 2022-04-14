@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { signInUser, signupUser } from '../services/auth';
 import Auth from '../components/Auth';
 import { useBasicContext } from '../context/BasicContext';
 
 function AuthPage({ setCurrentUser }) {
   // const [type, setType] = useState('sign-in');
-  const { username, 
+  const {
+    username, 
     type, 
     error,
     password,
