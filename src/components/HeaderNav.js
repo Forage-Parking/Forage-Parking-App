@@ -6,14 +6,20 @@ import styled from 'styled-components';
 
 function HeaderNav() {
   return (
-    <Header background="linear-gradient(to right, #c9d6ff, #e2e2e2)" pad="small" justify="between">
+    <>
       <Logo>
         For
         <IoLeafOutline />
         ge
       </Logo>
-      <Nav direction="row" />
-    </Header>
+      <Header
+        background="linear-gradient(to right, #c9d6bb, #e4e4e4)"
+        pad="small"
+        justify="between"
+      >
+        <Nav direction="row" />
+      </Header>
+    </>
   );
 }
 
