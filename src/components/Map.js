@@ -49,16 +49,9 @@ export default function Map({ spots }) {
     });
   });
   return (
-    <>
-      <div>
-        <span>
-          {lat}:{lng}
-        </span>
-      </div>
-      <div>
-        <Smap ref={mapContainer} />
-      </div>
-    </>
+    <div>
+      <Smap ref={mapContainer} />
+    </div>
   );
 }
 const Smap = styled.div`
