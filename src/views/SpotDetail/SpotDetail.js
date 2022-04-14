@@ -66,7 +66,8 @@ export default function SpotDetail() {
       <div key={spot.id}>
         {/* <img src = placeholder/> */}
         <p>{spot.name}</p>
-        <p>{spot.price}</p>
+        <img src={spot.image} alt="boring parking spot" />
+        <p>{`$${spot.price}/hour`}</p>
         <p>{spot.size}</p>
         <p>{spot.details}</p>
         {/* <p>{spot.available}</p> */}
