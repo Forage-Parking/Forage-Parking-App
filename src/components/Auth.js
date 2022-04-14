@@ -55,10 +55,22 @@ const H4 = styled.h4`
   justify-content: space-around;
 
   .in {
-    text-decoration: underline;
+    padding: 20px 50px;
+    border: 3px solid #3c67e3;
+    border-radius: 10px;
+    animation: pulsate 3s, ease-in-out;
   }
   .out {
-    text-decoration: underline;
+    padding: 20px 50px;
+    border: 3px solid #3c67e3;
+    border-radius: 10px;
+    animation: pulsate 3s ease-in-out;
+  }
+
+  @keyframes pulsate {
+    0% {
+      box-shadow: 0 0 25px #5ddcff, 0 0 50px #4e00c2;
+    }
   }
 `;
 export default Auth;
