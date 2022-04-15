@@ -24,12 +24,19 @@ function Devs() {
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Brenden</h2>
+            <p>Full-Stack Software Developer. I love bad movies and animals.</p>
+            <a href="https://www.linkedin.com/in/brendenseifried/">
+              <Image src="../assets/devBren.png" />
+            </a>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Josh</h2>
-            <p>I am a Full-Stack Software. Love gaming and reading. Also love pizza and ramen.</p> 
-            <a img = "https://www.linkedin.com/in/joshua-stresing-a6703b232/"></a>
-            <Image src = "../assets/josh.png" />
+            <p>
+              I am a Full-Stack Software Developer. Love gaming and reading. Also love pizza and
+              ramen.
+            </p>
+            <a href="https://www.linkedin.com/in/joshua-stresing-a6703b232/"></a>
+            <StyledImage src="../assets/josh.png" />
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Kamie</h2>
@@ -50,5 +57,11 @@ function Devs() {
 const StyledCard = styled(Card)`
   color: white;
   height: 200px;
+`;
+
+const StyledImage = styled(Image)`
+  height: 50px;
+  width: 50px;
+  margin-left: 42%;
 `;
 export default Devs;

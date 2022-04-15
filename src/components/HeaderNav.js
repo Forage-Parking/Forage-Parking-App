@@ -1,14 +1,16 @@
 import React from 'react';
 import Nav from './Nav';
-import { Header } from 'grommet';
+import { Avatar, Header } from 'grommet';
 import { IoLeafOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 import { logout } from '../services/auth';
 import { Link } from 'react-router-dom';
 import { useBasicContext } from '../context/BasicContext';
+import { useProfileContext } from '../context/ProfileContext';
 
 function HeaderNav() {
   const { setCurrentUser } = useBasicContext();
+  const { avatarUrl } = useProfileContext();
   const handleLogout = async () => {
     await logout();
     setCurrentUser('');
@@ -17,14 +19,17 @@ function HeaderNav() {
 
   return (
     <>
-      <Logout onClick={handleLogout}>logout</Logout>
+      <StyledDiv>
+        <Avatar src={avatarUrl} />
+        <Logout onClick={handleLogout}>logout</Logout>
+      </StyledDiv>
       <Logo to="/devs">
         For
         <IoLeafOutline />
         ge
       </Logo>
-      <Header background="#81b29a" pad="small" justify="between">
-        <Nav direction="row" />
+      <Header direction="row" background="#81b29a" pad="small" justify="between">
+        <Nav />
       </Header>
     </>
   );
@@ -55,5 +60,15 @@ const Logout = styled.button`
   cursor: pointer;
   transform: scale(0.8);
   z-index: 1000;
+`;
+const StyledDiv = styled.div`
+  display: flex;
+  button {
+    position: absolute;
+    right: 0;
+  }
+  div {
+    left: 1;
+  }
 `;
 export default HeaderNav;
