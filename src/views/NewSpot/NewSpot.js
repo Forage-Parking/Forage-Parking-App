@@ -5,7 +5,7 @@ import { fetchSignedUrl } from '../../services/auth';
 import { client } from '../../services/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import SpotFormV2 from '../../components/SpotForm/SpotFormV2';
