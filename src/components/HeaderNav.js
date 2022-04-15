@@ -4,6 +4,7 @@ import { Header } from 'grommet';
 import { IoLeafOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 import { logout } from '../services/auth';
+import { Link } from 'react-router-dom';
 import { useBasicContext } from '../context/BasicContext';
 
 function HeaderNav() {
@@ -17,7 +18,7 @@ function HeaderNav() {
   return (
     <>
       <Logout onClick={handleLogout}>logout</Logout>
-      <Logo>
+      <Logo to="/devs">
         For
         <IoLeafOutline />
         ge
@@ -29,9 +30,11 @@ function HeaderNav() {
   );
 }
 
-const Logo = styled.span`
+const Logo = styled(Link)`
   font-size: 1.5rem;
   font-weight: 400;
+  text-decoration: none;
+  color: #f4f1de;
   svg {
     color: #81b29a;
     transform: scale(-1, 1) rotate(90deg) translate(4px, -10%);

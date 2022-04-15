@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IoLeafOutline } from 'react-icons/io5';
 import { fetchProfileByUserId } from '../services/fetch';
 import { getUserId } from '../services/auth';
@@ -73,22 +73,6 @@ export const StyledNavLink = styled(NavLink)`
       color: white;
     }
   }
-`;
-const Logout = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.5rem;
-  margin-right: 2rem;
-  text-decoration: none;
-  background: linear-gradient(35deg, #494949, #313131);
-  color: white;
-  width: 6rem;
-  height: 2rem;
-  cursor: pointer;
-  transform: scale(0.8);
-  z-index: 1000;
 `;
 
 export default Nav;

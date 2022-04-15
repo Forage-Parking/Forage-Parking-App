@@ -49,13 +49,13 @@ export default function Profile() {
   // const userId = getUserId();
   // console.log(userId);
 
-  // useEffect(() => {
-  //   const fetchUrl = async () => {
-  //     const data = await fetchSignedUrl(avatarUrl);
-  //     setAvatar_Url(data.signedURL);
-  //   };
-  //   fetchUrl();
-  // }, [avatarUrl]);
+  useEffect(() => {
+    const fetchUrl = async () => {
+      const data = await fetchSignedUrl(avatarUrl);
+      setAvatar_Url(data.signedURL);
+    };
+    fetchUrl();
+  }, [avatarUrl]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,7 +81,9 @@ export default function Profile() {
   }, [userId, setSpots]);
 
   const editBtn = async () => {
-    {clicked ? setClicked(false) : setClicked(true);}
+    {
+      clicked ? setClicked(false) : setClicked(true);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -96,11 +98,15 @@ export default function Profile() {
         last_name: lastName,
         username: username,
         email: email,
-        image: avatarUrl,
+        image: avatar_Url,
       };
       await updateProfile(updates);
 
-      // let { error } = await client.from('profiles').update(updates, { returning: 'minimal' });
+      const data1 = await fetchProfileById(id);
+      setAvatarUrl(data1.image);
+      // const data3 = await fetchSignedUrl(avatarUrl);
+
+      let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
 
       if (error) {
         throw error;
@@ -130,9 +136,6 @@ export default function Profile() {
         <p>{username}</p>
         <p>{email}</p>
         <img src={avatarUrl} />
-        {/* <div className="edit-link">
-          {currentUser && <Link to={`/dogs/${profile.id}/edit`}>Edit</Link>}{' '}
-        </div> */}
       </div>
       <button onClick={editBtn}>Edit</button>
       <div>
@@ -141,7 +144,7 @@ export default function Profile() {
         )}
       </div>
 
-      {/* <div>
+      <div>
         {clicked && (
           <Upload
             url={avatarUrl}
@@ -149,9 +152,9 @@ export default function Profile() {
             onUpload={(url) => {
               setAvatarUrl(url);
             }}
-          /> */}
-      {/* )} */}
-      {/* {/* </div> */}
+          />
+        )}
+      </div>
       <div>
         {spots.map((spot) => (
           <div key={spot.id}>

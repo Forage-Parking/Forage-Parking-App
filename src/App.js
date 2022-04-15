@@ -11,6 +11,7 @@ import NewSpot from './views/NewSpot/NewSpot';
 import OwnerEdit from './views/OwnerEdit/OwnerEdit';
 import Profile from './views/Profile/Profile';
 import HeaderNav from './components/HeaderNav';
+import Devs from './views/Devs';
 
 function App() {
   const user = getUser();
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:id">
             {currentUser ? <Profile /> : <Redirect to="/auth" />}
+          </Route>
+          <Route exact path="/devs">
+            {currentUser ? <Devs /> : <Redirect to="/auth" />}
           </Route>
         </Switch>
       </AppDiv>
