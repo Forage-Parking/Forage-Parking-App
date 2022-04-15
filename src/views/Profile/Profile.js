@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
+import { Image } from 'grommet';
 
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 
@@ -119,7 +120,7 @@ export default function Profile() {
         <p>{lastName}</p>
         <p>{username}</p>
         <p>{email}</p>
-        <img src={avatarUrl} />
+        <Image src={avatarUrl} />
       </div>
       <button onClick={editBtn}>Edit</button>
       <div>
