@@ -4,15 +4,8 @@ import './ProfileForm.css';
 import { Box, Button, Form, FormField, TextInput } from 'grommet';
 import styled from 'styled-components';
 export default function ProfileForm({ handleSubmit }) {
-  const { setFirstName,
-    setLastName,
-    setUsername,
-    setEmail,
-    email, 
-    username, 
-    lastName, 
-    firstName, 
-  } = useProfileContext();
+  const { setFirstName, setLastName, setUsername, setEmail, email, username, lastName, firstName } =
+    useProfileContext();
   return (
     <Box fill align="center" justify="center">
       <Form onSubmit={handleSubmit}>
@@ -22,7 +15,7 @@ export default function ProfileForm({ handleSubmit }) {
               type="text"
               name="first_name"
               placeholder="First Name"
-              value={firstName ? firstName : ''} 
+              value={firstName ? firstName : ''}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </FormField>
@@ -31,7 +24,7 @@ export default function ProfileForm({ handleSubmit }) {
               type="text"
               name="last_name"
               placeholder="Last Name"
-              value={lastName ? lastName : ''} 
+              value={lastName ? lastName : ''}
               onChange={(e) => setLastName(e.target.value)}
             />
           </FormField>
@@ -55,7 +48,7 @@ export default function ProfileForm({ handleSubmit }) {
             />
           </FormField>{' '}
           <Box direction="row" justify="between" margin={{ top: 'medium' }}>
-            <ButtonColor type="submit" label="Save Spot" />
+            <ButtonColor type="submit" label="Save Profile" />
           </Box>
         </Box>
       </Form>
@@ -66,16 +59,15 @@ const ButtonColor = styled(Button)`
   color: #f4f1de;
 `;
 
-
 // export default function ProfileForm({ handleSubmit }) {
 //   const { setFirstName,
 //     setLastName,
 //     setUsername,
 //     setEmail,
-//     email, 
-//     username, 
-//     lastName, 
-//     firstName, 
+//     email,
+//     username,
+//     lastName,
+//     firstName,
 //   } = useProfileContext();
 //   return (
 //     <form className="profile-form" onSubmit={handleSubmit}>
@@ -84,4 +76,4 @@ const ButtonColor = styled(Button)`
 //         type="text"
 //         name="first_name"
 //         placeholder="First Name"
-//         value={firstName ? firstName : ''} 
+//         value={firstName ? firstName : ''}

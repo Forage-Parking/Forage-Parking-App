@@ -51,10 +51,10 @@ const Logout = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  margin-right: 2rem;
+  margin-top: 1rem;
   text-decoration: none;
   background: linear-gradient(35deg, #494949, #313131);
-  color: white;
+  color: #f4f1de;
   width: 6rem;
   height: 2rem;
   cursor: pointer;
