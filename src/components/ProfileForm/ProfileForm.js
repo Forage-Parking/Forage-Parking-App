@@ -1,17 +1,17 @@
 import React from 'react';
+import { useProfileContext } from '../../context/ProfileContext';
 import './ProfileForm.css';
 
-export default function ProfileForm({
-  setFirstName,
-  setLastName,
-  setUsername,
-  handleSubmit,
-  setEmail,
-  firstName,
-  lastName,
-  username,
-  email,
-}) {
+export default function ProfileForm() {
+  const { setFirstName,
+    setLastName,
+    setUsername,
+    handleSubmit,
+    setEmail,
+    firstName,
+    lastName,
+    username,
+    email } = useProfileContext();
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
       <label>First Name</label>

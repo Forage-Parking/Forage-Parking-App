@@ -13,27 +13,41 @@ import {
 } from '../../services/fetch';
 
 import './Profile.css';
+import { useProfileContext } from '../../context/ProfileContext';
 
 export default function Profile() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  // const [avatar_Url, setAvatar_Url] = useState(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const [profileDetails, setProfileDetails] = useState([]);
-  const [clicked, setClicked] = useState(false);
-  const [error, setError] = useState('');
-  const [spots, setSpots] = useState([]);
-
+  const userId = getUserId();
   const params = useParams();
   const id = params.id;
+  // const [avatarUrl, setAvatarUrl] = useState(null);
+  // const [avatar_Url, setAvatar_Url] = useState(null);
+  // const [firstName, setFirstName] = useState('');
+  const { firstName, setFirstName,
+    lastName, setLastName,
+    username, setUsername,
+    email, setEmail,
+    loading, setLoading,
+    avatarUrl, setAvatarUrl,
+    clicked, setClicked, 
+    error,
+    spots, setSpots } = useProfileContext();
+
+   
+  // const [lastName, setLastName] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [loading, setLoading] = useState(false);
+
+  // const [profileDetails, setProfileDetails] = useState([]);
+  // const [clicked, setClicked] = useState(false);
+  // const [error, setError] = useState('');
+  // const [spots, setSpots] = useState([]);
+
+
   // const [profile_image, setProfile_image] = useState('');
 
-  const userId = getUserId();
-  console.log(userId);
+  // const userId = getUserId();
+  // console.log(userId);
 
   // useEffect(() => {
   //   const fetchUrl = async () => {
@@ -55,17 +69,16 @@ export default function Profile() {
       setAvatarUrl(data1.image);
     };
     fetchData();
-  }, [id]);
+  }, [id, setFirstName, setLastName, setUsername, setEmail, setAvatarUrl]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data2 = await fetchSpotsByOwnerId(userId);
-      console.log(data2);
 
       setSpots(data2);
     };
     fetchData();
-  }, [userId]);
+  }, [userId, setSpots]);
 
   const editBtn = async () => {
     {clicked ? setClicked(false) : setClicked(true);}
@@ -124,19 +137,7 @@ export default function Profile() {
       <button onClick={editBtn}>Edit</button>
       <div>
         {clicked && (
-          <ProfileForm
-            {...{
-              setFirstName,
-              setLastName,
-              setUsername,
-              setEmail,
-              handleSubmit,
-              firstName,
-              lastName,
-              username,
-              email,
-            }}
-          />
+          <ProfileForm/>
         )}
       </div>
 

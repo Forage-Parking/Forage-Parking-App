@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { BasicProvider } from './context/BasicContext';
 import { SpotProvider } from './context/SpotContext';
+import { ProfileProvider } from './context/ProfileContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SpotProvider>
-      <BasicProvider>
-        <App />
-      </BasicProvider>
-    </SpotProvider>
+    <ProfileProvider>
+      <SpotProvider>
+        <BasicProvider>
+          <App />
+        </BasicProvider>
+      </SpotProvider>
+    </ProfileProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
