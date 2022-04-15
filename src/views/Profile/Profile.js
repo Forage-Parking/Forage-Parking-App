@@ -115,12 +115,12 @@ export default function Profile() {
 
   return (
     <>
+      <Image src={avatarUrl} />
       <div className="profile-details">
         <p>{firstName}</p>
         <p>{lastName}</p>
         <p>{username}</p>
         <p>{email}</p>
-        <Image src={avatarUrl} />
       </div>
       <button onClick={editBtn}>Edit</button>
       <div>
