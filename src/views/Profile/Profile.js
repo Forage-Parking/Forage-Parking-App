@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
 import { Image } from 'grommet';
@@ -15,24 +15,22 @@ import {
 } from '../../services/fetch';
 
 import './Profile.css';
+import { useProfileContext } from '../../context/ProfileContext';
 import { client } from '../../services/client';
 
 export default function Profile() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [avatar_Url, setAvatar_Url] = useState(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const [spots, setSpots] = useState([]);
-
+  const userId = getUserId();
   const params = useParams();
   const id = params.id;
-  // const [profile_image, setProfile_image] = useState('');
-
-  const userId = getUserId();
+  const { firstName, setFirstName,
+    lastName, setLastName,
+    username, setUsername,
+    email, setEmail,
+    loading, setLoading,
+    avatarUrl, setAvatarUrl,
+    clicked, setClicked, 
+    avatar_Url, setAvatar_Url,
+    spots, setSpots, } = useProfileContext();
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -40,13 +38,12 @@ export default function Profile() {
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
-  }, [avatarUrl]);
+  }, [avatarUrl, setAvatar_Url]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data1 = await fetchProfileById(id);
+      const data1 = await fetchProfileById(`${id}`);  //added template Literal Watch out
 
-      // setProfileDetails(data1);
       setFirstName(data1.first_name);
       setLastName(data1.last_name);
       setUsername(data1.username);
@@ -54,7 +51,7 @@ export default function Profile() {
       setAvatarUrl(data1.image);
     };
     fetchData();
-  }, [id]);
+  }, [id, setFirstName, setLastName, setUsername, setEmail, setAvatarUrl]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +60,7 @@ export default function Profile() {
       setSpots(data2);
     };
     fetchData();
-  }, [userId]);
+  }, [userId, setSpots]);
 
   const editBtn = async () => {
     {
@@ -77,7 +74,6 @@ export default function Profile() {
     try {
       setLoading(true);
       const updates = {
-        // user_id: user,
         id: id,
         first_name: firstName,
         last_name: lastName,
@@ -89,7 +85,6 @@ export default function Profile() {
 
       const data1 = await fetchProfileById(id);
       setAvatarUrl(data1.image);
-      // const data3 = await fetchSignedUrl(avatarUrl);
 
       let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
 
@@ -125,19 +120,7 @@ export default function Profile() {
       <button onClick={editBtn}>Edit</button>
       <div>
         {clicked && (
-          <ProfileForm
-            {...{
-              setFirstName,
-              setLastName,
-              setUsername,
-              setEmail,
-              handleSubmit,
-              firstName,
-              lastName,
-              username,
-              email,
-            }}
-          />
+          <ProfileForm {...{ handleSubmit }}/>
         )}
       </div>
 

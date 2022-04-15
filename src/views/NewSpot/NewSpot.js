@@ -1,28 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
-import { fetchSignedUrl, getUserId } from '../../services/auth';
+import { fetchSignedUrl } from '../../services/auth';
 import { client } from '../../services/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useSpotContext } from '../../context/SpotContext';
 
 export default function NewSpot() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [avatar_Url, setAvatar_Url] = useState(null);
-  const [size, setSize] = useState('compact');
-  const [details, setDetails] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [price, setPrice] = useState('5');
-  const [loading, setLoading] = useState(false);
+
+  const { 
+    avatarUrl, 
+    setAvatarUrl, 
+    avatar_Url, 
+    setAvatar_Url, 
+    size, 
+    details, 
+    nickname, 
+    price,  
+    loading, 
+    setLoading,
+    lat, 
+    setLat, 
+    lng, 
+    setLng,
+    zoom, 
+    setZoom, 
+    user } = useSpotContext();
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lat, setLat] = useState(45.523064);
-  const [lng, setLng] = useState(-122.676483);
-  const [zoom, setZoom] = useState(9);
   const history = useHistory();
 
   useEffect(() => {
@@ -49,7 +59,7 @@ export default function NewSpot() {
     setLng(map.current.getCenter().lng.toFixed(4));
     setLat(map.current.getCenter().lat.toFixed(4));
     setZoom(map.current.getZoom().toFixed(2));
-  }, []);
+  }, [setLat, setZoom, setLng]);
 
   useEffect(() => {
     if (!map.current) return;
@@ -60,17 +70,15 @@ export default function NewSpot() {
     });
   });
 
-  const user = getUserId();
-
+  
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
       setAvatar_Url(data.signedURL);
-    };
+    }; 
     fetchUrl();
-  }, [avatarUrl]);
+  }, [avatarUrl, setAvatar_Url]);
 
-  // const [avatar_url, setAvatar_Url] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -115,13 +123,7 @@ export default function NewSpot() {
           }}
         />
         <SpotForm
-          {...{
-            setSize,
-            setDetails,
-            setNickname,
-            setPrice,
-            handleSubmit,
-          }}
+          {...{ handleSubmit }}
         />
       </div>
       <div></div>

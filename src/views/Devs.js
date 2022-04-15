@@ -24,6 +24,10 @@ function Devs() {
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Brenden</h2>
+            <p>Full-Stack Software Developer. I love bad movies and animals.</p>
+            <a href="https://www.linkedin.com/in/brendenseifried/">
+              <Image src="../assets/devBren.png" />
+            </a>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Josh</h2>

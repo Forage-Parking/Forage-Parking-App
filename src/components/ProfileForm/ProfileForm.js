@@ -1,18 +1,18 @@
 import React from 'react';
+import { useProfileContext } from '../../context/ProfileContext';
 import './ProfileForm.css';
 import { Box, Button, Form, FormField, TextInput } from 'grommet';
 import styled from 'styled-components';
-export default function ProfileForm({
-  setFirstName,
-  setLastName,
-  setUsername,
-  handleSubmit,
-  setEmail,
-  firstName,
-  lastName,
-  username,
-  email,
-}) {
+export default function ProfileForm({ handleSubmit }) {
+  const { setFirstName,
+    setLastName,
+    setUsername,
+    setEmail,
+    email, 
+    username, 
+    lastName, 
+    firstName, 
+  } = useProfileContext();
   return (
     <Box fill align="center" justify="center">
       <Form onSubmit={handleSubmit}>
@@ -22,7 +22,7 @@ export default function ProfileForm({
               type="text"
               name="first_name"
               placeholder="First Name"
-              value={firstName}
+              value={firstName ? firstName : ''} 
               onChange={(e) => setFirstName(e.target.value)}
             />
           </FormField>
@@ -31,7 +31,7 @@ export default function ProfileForm({
               type="text"
               name="last_name"
               placeholder="Last Name"
-              value={lastName}
+              value={lastName ? lastName : ''} 
               onChange={(e) => setLastName(e.target.value)}
             />
           </FormField>
@@ -65,3 +65,23 @@ export default function ProfileForm({
 const ButtonColor = styled(Button)`
   color: #f4f1de;
 `;
+
+
+// export default function ProfileForm({ handleSubmit }) {
+//   const { setFirstName,
+//     setLastName,
+//     setUsername,
+//     setEmail,
+//     email, 
+//     username, 
+//     lastName, 
+//     firstName, 
+//   } = useProfileContext();
+//   return (
+//     <form className="profile-form" onSubmit={handleSubmit}>
+//       <label>First Name</label>
+//       <input
+//         type="text"
+//         name="first_name"
+//         placeholder="First Name"
+//         value={firstName ? firstName : ''} 
