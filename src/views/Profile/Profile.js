@@ -22,15 +22,26 @@ export default function Profile() {
   const userId = getUserId();
   const params = useParams();
   const id = params.id;
-  const { firstName, setFirstName,
-    lastName, setLastName,
-    username, setUsername,
-    email, setEmail,
-    loading, setLoading,
-    avatarUrl, setAvatarUrl,
-    clicked, setClicked, 
-    avatar_Url, setAvatar_Url,
-    spots, setSpots, } = useProfileContext();
+  const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    username,
+    setUsername,
+    email,
+    setEmail,
+    loading,
+    setLoading,
+    avatarUrl,
+    setAvatarUrl,
+    clicked,
+    setClicked,
+    avatar_Url,
+    setAvatar_Url,
+    spots,
+    setSpots,
+  } = useProfileContext();
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -42,7 +53,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data1 = await fetchProfileById(`${id}`);  //added template Literal Watch out
+      const data1 = await fetchProfileById(`${id}`); //added template Literal Watch out
 
       setFirstName(data1.first_name);
       setLastName(data1.last_name);
@@ -118,11 +129,7 @@ export default function Profile() {
         <p>{email}</p>
       </div>
       <button onClick={editBtn}>Edit</button>
-      <div>
-        {clicked && (
-          <ProfileForm {...{ handleSubmit }}/>
-        )}
-      </div>
+      <div>{clicked && <ProfileForm {...{ handleSubmit }} />}</div>
 
       <div>
         {clicked && (
