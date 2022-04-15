@@ -10,6 +10,10 @@ function Devs() {
         <Grid>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Andrea</h2>
+            <p>Full-stack software developer, mom, enjoyer of good bagels!</p>
+            <a href="https://www.linkedin.com/in/andrea-cleland/">
+              <img src="../assets/pixel-andrea.png" />
+            </a>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Bradley</h2>
