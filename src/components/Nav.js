@@ -56,7 +56,7 @@ export const StyledNavLink = styled(NavLink)`
 
   h4 {
     position: absolute;
-    left: 2rem;
+    left: 1.7rem;
     color: white;
     font-size: 0.8rem;
   }
