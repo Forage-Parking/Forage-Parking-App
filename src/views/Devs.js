@@ -29,7 +29,9 @@ function Devs() {
               Full Stack Software Engineer. Learning cool stuff every day! Loves dogs, family, and
               campervans!
             </p>
-            <a href="https://www.linkedin.com/in/kamieshort/" />
+            <a href="https://www.linkedin.com/in/kamieshort/">
+              <img src="../assets/devimage.png" />
+            </a>
           </StyledCard>
         </Grid>
       </PageContent>
