@@ -22,9 +22,6 @@ export default function Profile() {
   const userId = getUserId();
   const params = useParams();
   const id = params.id;
-  // const [avatarUrl, setAvatarUrl] = useState(null);
-  // const [avatar_Url, setAvatar_Url] = useState(null);
-  // const [firstName, setFirstName] = useState('');
   const { firstName, setFirstName,
     lastName, setLastName,
     username, setUsername,
@@ -34,23 +31,6 @@ export default function Profile() {
     clicked, setClicked, 
     avatar_Url, setAvatar_Url,
     spots, setSpots, } = useProfileContext();
-
-   
-  // const [lastName, setLastName] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [loading, setLoading] = useState(false);
-
-  // const [profileDetails, setProfileDetails] = useState([]);
-  // const [clicked, setClicked] = useState(false);
-  // const [error, setError] = useState('');
-  // const [spots, setSpots] = useState([]);
-
-
-  // const [profile_image, setProfile_image] = useState('');
-
-  // const userId = getUserId();
-  // console.log(userId);
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -64,7 +44,6 @@ export default function Profile() {
     const fetchData = async () => {
       const data1 = await fetchProfileById(`${id}`);  //added template Literal Watch out
 
-      // setProfileDetails(data1);
       setFirstName(data1.first_name);
       setLastName(data1.last_name);
       setUsername(data1.username);
@@ -95,7 +74,6 @@ export default function Profile() {
     try {
       setLoading(true);
       const updates = {
-        // user_id: user,
         id: id,
         first_name: firstName,
         last_name: lastName,
@@ -107,7 +85,6 @@ export default function Profile() {
 
       const data1 = await fetchProfileById(id);
       setAvatarUrl(data1.image);
-      // const data3 = await fetchSignedUrl(avatarUrl);
 
       let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
 

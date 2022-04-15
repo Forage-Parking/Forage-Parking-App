@@ -80,7 +80,6 @@ export default function NewSpot() {
     fetchUrl();
   }, [avatarUrl, setAvatar_Url]);
 
-  // const [avatar_url, setAvatar_Url] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
