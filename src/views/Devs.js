@@ -9,7 +9,8 @@ function Devs() {
         <Heading>Foragers</Heading>
         <Grid>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Andrea</p>
+            <h2>Andrea</h2>
+            <p>Fullstack software developer, enjoyer of good bagels, </p>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <p>Bradley</p>
