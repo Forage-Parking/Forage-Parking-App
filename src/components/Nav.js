@@ -1,16 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IoLeafOutline } from 'react-icons/io5';
 import { fetchProfileByUserId } from '../services/fetch';
-import { getUserId, logout } from '../services/auth';
-import { useBasicContext } from '../context/BasicContext';
+import { getUserId } from '../services/auth';
 
 function Nav() {
   const [profile, setProfile] = useState({});
-  const { setCurrentUser } = useBasicContext();
-  const history = useHistory();
   const user = getUserId();
   useEffect(() => {
     const fetchData = async () => {
@@ -20,20 +17,12 @@ function Nav() {
     fetchData();
   }, [user]);
 
-  const handleLogout = async () => {
-    await logout();
-    setCurrentUser('');
-    history.go(0);
-  };
-
   return (
     <StyledList>
       <StyledNavLink exact to="/">
         <IoLeafOutline />
         <h4>Home</h4>
       </StyledNavLink>
-
-      <button onClick={handleLogout}>logout</button>
 
       <StyledNavLink to={`/profile/${profile.id}`}>
         <h4>Profile</h4>
@@ -75,7 +64,7 @@ export const StyledNavLink = styled(NavLink)`
     font-size: 1.5rem;
   }
   &.active {
-    background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+    background: #e07a5f;
 
     h4 {
       color: black;
