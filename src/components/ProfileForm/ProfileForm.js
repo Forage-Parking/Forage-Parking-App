@@ -55,7 +55,6 @@ export default function ProfileForm({
             />
           </FormField>{' '}
           <Box direction="row" justify="between" margin={{ top: 'medium' }}>
-            <ButtonColor type="reset" label="Reset form" />
             <ButtonColor type="submit" label="Save Spot" />
           </Box>
         </Box>
