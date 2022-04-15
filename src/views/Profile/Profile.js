@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import Upload from '../../components/Upload/Upload';
-import { Image } from 'grommet';
+import { Button, Image, Paragraph, Grid } from 'grommet';
+import styled from 'styled-components';
 
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 
@@ -120,15 +121,15 @@ export default function Profile() {
   };
 
   return (
-    <>
-      <Image src={avatarUrl} />
-      <div className="profile-details">
-        <p>{firstName}</p>
-        <p>{lastName}</p>
-        <p>{username}</p>
-        <p>{email}</p>
-      </div>
-      <button onClick={editBtn}>Edit</button>
+    <Grid>
+      <Grid>
+        <Image src={avatarUrl} />
+        <Paragraph>{` ${firstName} ${lastName}`}</Paragraph>
+
+        <Paragraph>Username: {username}</Paragraph>
+        <Paragraph>Email: {email}</Paragraph>
+      </Grid>
+      <ButtonColor label="Edit Profile" onClick={editBtn} />
       <div>{clicked && <ProfileForm {...{ handleSubmit }} />}</div>
 
       <div>
@@ -142,16 +143,20 @@ export default function Profile() {
           />
         )}
       </div>
-      <div>
+      <Grid>
+        <Paragraph>Your Owned Parking Spots</Paragraph>
         {spots.map((spot) => (
           <div key={spot.id}>
-            <p>{spot.name}</p>
-            <p>{spot.details}</p>
-            <img src={spot.image} />
-            <button onClick={() => handleDelete(spot.id)}>Delete</button>
+            <Paragraph>{spot.name}</Paragraph>
+            <Paragraph>{spot.details}</Paragraph>
+            <Image src={spot.image} />
+            <ButtonColor label="Delete" onClick={() => handleDelete(spot.id)} />
           </div>
         ))}
-      </div>
-    </>
+      </Grid>
+    </Grid>
   );
 }
+const ButtonColor = styled(Button)`
+  color: #f4f1de;
+`;
