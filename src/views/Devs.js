@@ -9,19 +9,25 @@ function Devs() {
         <Heading>Foragers</Heading>
         <Grid>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Andrea</p>
+            <h2>Andrea</h2>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Bradley</p>
+            <h2>Bradley</h2>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Brenden</p>
+            <h2>Brenden</h2>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Josh</p>
+            <h2>Josh</h2>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
-            <p>Kamie</p>
+            <h2>Kamie</h2>
+            <br />
+            <p>
+              Full Stack Software Engineer. Learning cool stuff every day! Loves dogs, family, and
+              campervans!
+            </p>
+            <a href="https://www.linkedin.com/in/kamieshort/" />
           </StyledCard>
         </Grid>
       </PageContent>
