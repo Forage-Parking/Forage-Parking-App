@@ -13,10 +13,9 @@ import { useSpotContext } from '../../context/SpotContext';
 export default function NewSpot() {
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
+  const [avatarUrl, setAvatarUrl] = useState(null);
   const [zoom, setZoom] = useState(9);
   const { 
-    avatarUrl, 
-    setAvatarUrl, 
     avatar_Url, 
     setAvatar_Url, 
     size, 
