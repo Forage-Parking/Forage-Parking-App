@@ -59,21 +59,4 @@ const ButtonColor = styled(Button)`
   color: #f4f1de;
 `;
 
-// export default function ProfileForm({ handleSubmit }) {
-//   const { setFirstName,
-//     setLastName,
-//     setUsername,
-//     setEmail,
-//     email,
-//     username,
-//     lastName,
-//     firstName,
-//   } = useProfileContext();
-//   return (
-//     <form className="profile-form" onSubmit={handleSubmit}>
-//       <label>First Name</label>
-//       <input
-//         type="text"
-//         name="first_name"
-//         placeholder="First Name"
-//         value={firstName ? firstName : ''}
+
