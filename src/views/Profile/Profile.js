@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
-// import Upload from '../../components/Upload/Upload';
+import Upload from '../../components/Upload/Upload';
+import { Image } from 'grommet';
+
 import { fetchSignedUrl, getUserId } from '../../services/auth';
 
 import { useParams } from 'react-router-dom';
@@ -14,7 +16,6 @@ import {
 
 import './Profile.css';
 import { useProfileContext } from '../../context/ProfileContext';
-import Upload from '../../components/Upload/Upload';
 import { client } from '../../services/client';
 
 export default function Profile() {
@@ -137,7 +138,7 @@ export default function Profile() {
         <p>{lastName}</p>
         <p>{username}</p>
         <p>{email}</p>
-        <img src={avatarUrl} />
+        <Image src={avatarUrl} />
       </div>
       <button onClick={editBtn}>Edit</button>
       <div>
