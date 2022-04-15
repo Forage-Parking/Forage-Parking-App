@@ -33,7 +33,6 @@ export default function Profile() {
   // const [profile_image, setProfile_image] = useState('');
 
   const userId = getUserId();
-  console.log(userId);
 
   // useEffect(() => {
   //   const fetchUrl = async () => {
@@ -60,7 +59,6 @@ export default function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       const data2 = await fetchSpotsByOwnerId(userId);
-      console.log(data2);
 
       setSpots(data2);
     };
@@ -68,7 +66,9 @@ export default function Profile() {
   }, [userId]);
 
   const editBtn = async () => {
-    {clicked ? setClicked(false) : setClicked(true);}
+    {
+      clicked ? setClicked(false) : setClicked(true);
+    }
   };
 
   const handleSubmit = async (e) => {

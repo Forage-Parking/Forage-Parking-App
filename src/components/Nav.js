@@ -74,21 +74,5 @@ export const StyledNavLink = styled(NavLink)`
     }
   }
 `;
-const Logout = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.5rem;
-  margin-right: 2rem;
-  text-decoration: none;
-  background: linear-gradient(35deg, #494949, #313131);
-  color: white;
-  width: 6rem;
-  height: 2rem;
-  cursor: pointer;
-  transform: scale(0.8);
-  z-index: 1000;
-`;
 
 export default Nav;
