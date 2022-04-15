@@ -34,7 +34,6 @@ export default function Home() {
             // pagination: false,
             drag: 'free',
             gap: '10px',
-            height: '200px',
           }}
         >
           {spots.map((spot) => (
@@ -72,6 +71,9 @@ const Card = styled.div`
   img {
     border-radius: 1rem;
     /* position: absolute; */
+    min-height: 25rem;
+    max-height: 25rem;
+    max-width: 390px;
     left: 0;
     width: 100%;
     height: 100%;

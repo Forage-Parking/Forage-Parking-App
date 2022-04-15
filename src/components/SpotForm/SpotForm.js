@@ -4,7 +4,6 @@ import { Box, Button, Form, FormField, Select, TextArea, TextInput } from 'gromm
 import { useSpotContext } from '../../context/SpotContext';
 import styled from 'styled-components';
 
-const suggestions = ['Ye ol Parking Spot'];
 export default function SpotForm({ handleSubmit }) {
   const { setSize, setDetails, setNickname, setPrice } = useSpotContext();
   return (
@@ -15,7 +14,6 @@ export default function SpotForm({ handleSubmit }) {
             <TextInput
               name="name"
               placeholder="enter spot nickname"
-              suggestions={suggestions}
               onChange={(e) => setNickname(e.target.value)}
             />
           </FormField>

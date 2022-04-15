@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { IoLeafOutline } from 'react-icons/io5';
+import { AiFillCar } from 'react-icons/ai';
 import { fetchProfileByUserId } from '../services/fetch';
 import { getUserId } from '../services/auth';
 
@@ -20,14 +20,15 @@ function Nav() {
   return (
     <StyledList>
       <StyledNavLink exact to="/">
-        <IoLeafOutline />
+        <AiFillCar />
         <h4>Home</h4>
       </StyledNavLink>
-
       <StyledNavLink to={`/profile/${profile.id}`}>
+        <AiFillCar />
         <h4>Profile</h4>
       </StyledNavLink>
       <StyledNavLink to="/spots/new">
+        <AiFillCar />
         <h4>New Spot</h4>
       </StyledNavLink>
     </StyledList>
@@ -55,13 +56,15 @@ export const StyledNavLink = styled(NavLink)`
 
   h4 {
     position: absolute;
-    // top: 1.5rem;
+    left: 2rem;
     color: white;
     font-size: 0.8rem;
   }
   svg {
     color: white;
     font-size: 1.5rem;
+    position: absolute;
+    left: 2px;
   }
   &.active {
     background: #e07a5f;
@@ -70,7 +73,7 @@ export const StyledNavLink = styled(NavLink)`
       color: black;
     }
     svg {
-      color: white;
+      color: #f4f1de;
     }
   }
 `;
