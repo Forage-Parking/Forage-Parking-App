@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import mapboxgl from '!mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import styled from 'styled-components';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -49,16 +49,9 @@ export default function Map({ spots }) {
     });
   });
   return (
-    <>
-      <div>
-        <span>
-          {lat}:{lng}
-        </span>
-      </div>
-      <div>
-        <Smap ref={mapContainer} />
-      </div>
-    </>
+    <div>
+      <Smap ref={mapContainer} />
+    </div>
   );
 }
 const Smap = styled.div`

@@ -26,15 +26,15 @@ export default function Home() {
   return (
     <>
       <Wrapper>
-        FORAGE PARKING <br></br>The best parking app that ever existed!
         <Splide
           options={{
             perPage: 1,
             type: 'loop',
             arrows: false,
-            pagination: false,
+            // pagination: false,
             drag: 'free',
             gap: '10px',
+            height: '200px',
           }}
         >
           {spots.map((spot) => (
@@ -58,21 +58,23 @@ export default function Home() {
   );
 }
 const Wrapper = styled.div`
-  margin: 4rem 0rem;
+  margin: 2rem 0rem;
 `;
 
 const Card = styled.div`
   min-height: 25rem;
-  border-radius: 2rem;
+  max-height: 25rem;
+  max-width: 390px;
+  border-radius: 1rem;
   overflow: hidden;
   position: relative;
 
   img {
-    border-radius: 2rem;
+    border-radius: 1rem;
     /* position: absolute; */
     left: 0;
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   p {

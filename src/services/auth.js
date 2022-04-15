@@ -8,9 +8,9 @@ export function getUserId() {
   return client.auth.session() && client.auth.session().user.id;
 }
 
-export async function signupUser(email, password) {
+export async function signupUser(email, password, username) {
   const { user, error } = await client.auth.signUp({ email, password });
-  await client.from('profiles').insert({ user_id: user.id, email: email, username: email });
+  await client.from('profiles').insert({ user_id: user.id, email: email, username: username });
   if (error) {
     throw error;
   }

@@ -5,7 +5,7 @@ import { fetchSignedUrl, getUserId } from '../../services/auth';
 import { client } from '../../services/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import mapboxgl from '!mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -61,6 +61,7 @@ export default function NewSpot() {
   });
 
   const user = getUserId();
+
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
@@ -102,6 +103,17 @@ export default function NewSpot() {
   return (
     <>
       <div>
+        <Container>
+          <Smap ref={mapContainer} />
+        </Container>
+        <Upload
+          url={avatarUrl}
+          sizeW={400}
+          sizeH={400}
+          onUpload={(url) => {
+            setAvatarUrl(url);
+          }}
+        />
         <SpotForm
           {...{
             setSize,
@@ -112,18 +124,7 @@ export default function NewSpot() {
           }}
         />
       </div>
-      <Container>
-        <Smap ref={mapContainer} />
-      </Container>
-      <div>
-        <Upload
-          url={avatarUrl}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-          }}
-        />
-      </div>
+      <div></div>
     </>
   );
 }

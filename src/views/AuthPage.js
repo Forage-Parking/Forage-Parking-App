@@ -8,6 +8,7 @@ function AuthPage({ setCurrentUser }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [type, setType] = useState('sign-in');
+  const [username, setUsername] = useState('');
 
   const history = useHistory();
 
@@ -23,7 +24,7 @@ function AuthPage({ setCurrentUser }) {
       }
     } else
       try {
-        const resp = await signupUser(email, password);
+        const resp = await signupUser(email, password, username);
         setCurrentUser(resp.email);
         history.push('/');
       } catch (e) {
@@ -33,7 +34,20 @@ function AuthPage({ setCurrentUser }) {
   return (
     <div>
       {error && <p>{error}</p>}
-      <Auth {...{ error, password, email, setEmail, setPassword, handleSubmit, type, setType }} />
+      <Auth
+        {...{
+          username,
+          setUsername,
+          error,
+          password,
+          email,
+          setEmail,
+          setPassword,
+          handleSubmit,
+          type,
+          setType,
+        }}
+      />
     </div>
   );
 }
