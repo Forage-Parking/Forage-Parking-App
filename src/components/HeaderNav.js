@@ -3,13 +3,14 @@ import Nav from './Nav';
 import { Avatar, Header } from 'grommet';
 import { IoLeafOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-import { logout } from '../services/auth';
+import { getUser, logout } from '../services/auth';
 import { Link } from 'react-router-dom';
 import { useBasicContext } from '../context/BasicContext';
 import { useProfileContext } from '../context/ProfileContext';
 
 function HeaderNav() {
   const { setCurrentUser } = useBasicContext();
+  const user = getUser();
   const { avatarUrl } = useProfileContext();
   const handleLogout = async () => {
     await logout();
@@ -21,7 +22,9 @@ function HeaderNav() {
     <>
       <StyledDiv>
         <Avatar src={avatarUrl} />
+        {user &&
         <Logout onClick={handleLogout}>logout</Logout>
+        }
       </StyledDiv>
       <Logo to="/devs">
         For
@@ -51,10 +54,10 @@ const Logout = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  margin-right: 2rem;
+  margin-top: 1rem;
   text-decoration: none;
   background: linear-gradient(35deg, #494949, #313131);
-  color: white;
+  color: #f4f1de;
   width: 6rem;
   height: 2rem;
   cursor: pointer;
