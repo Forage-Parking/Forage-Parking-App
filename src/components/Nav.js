@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IoLeafOutline } from 'react-icons/io5';
 import { fetchProfileByUserId } from '../services/fetch';
 import { getUserId } from '../services/auth';
