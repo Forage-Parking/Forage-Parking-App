@@ -1,4 +1,4 @@
-import { PageContent, Heading, Grid, Card } from 'grommet';
+import { PageContent, Heading, Grid, Card, Image } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,6 +13,10 @@ function Devs() {
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Bradley</h2>
+            <p>Full Stack Software Developer. I like pizza and coding.</p>
+            <a href="https://www.linkedin.com/in/bradleybird/">
+              <Image src="../assets/bradleydev.png" />
+            </a>
           </StyledCard>
           <StyledCard background="#eo7a5f" pad="large">
             <h2>Brenden</h2>
@@ -28,7 +32,7 @@ function Devs() {
               campervans!
             </p>
             <a href="https://www.linkedin.com/in/kamieshort/">
-              <img src="../assets/devimage.png" />
+              <Image src="../assets/devimage.png" />
             </a>
           </StyledCard>
         </Grid>
