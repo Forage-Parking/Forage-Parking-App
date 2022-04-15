@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 // import Upload from '../../components/Upload/Upload';
-import { getUserId } from '../../services/auth';
+import { fetchSignedUrl, getUserId } from '../../services/auth';
 
 import { useParams } from 'react-router-dom';
 import {
@@ -14,6 +14,8 @@ import {
 
 import './Profile.css';
 import { useProfileContext } from '../../context/ProfileContext';
+import Upload from '../../components/Upload/Upload';
+import { client } from '../../services/client';
 
 export default function Profile() {
   const userId = getUserId();
@@ -29,7 +31,7 @@ export default function Profile() {
     loading, setLoading,
     avatarUrl, setAvatarUrl,
     clicked, setClicked, 
-    error,
+    avatar_Url, setAvatar_Url,
     spots, setSpots, } = useProfileContext();
 
    
@@ -55,7 +57,7 @@ export default function Profile() {
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
-  }, [avatarUrl]);
+  }, [avatarUrl, setAvatar_Url]);
 
   useEffect(() => {
     const fetchData = async () => {

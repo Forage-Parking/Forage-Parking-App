@@ -8,7 +8,6 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from '!mapbox-gl';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import SpotFormV2 from '../../components/SpotForm/SpotFormV2';
 import { useSpotContext } from '../../context/SpotContext';
 
 export default function NewSpot() {
@@ -61,7 +60,7 @@ export default function NewSpot() {
     setLng(map.current.getCenter().lng.toFixed(4));
     setLat(map.current.getCenter().lat.toFixed(4));
     setZoom(map.current.getZoom().toFixed(2));
-  }, []);
+  }, [setLat, setZoom, setLng]);
 
   useEffect(() => {
     if (!map.current) return;

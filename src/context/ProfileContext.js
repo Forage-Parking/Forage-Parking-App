@@ -9,7 +9,7 @@ const ProfileProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
-//   const [avatar_Url, setAvatar_Url] = useState(null);
+  const [avatar_Url, setAvatar_Url] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [error, setError] = useState('');
   const [spots, setSpots] = useState([]);
@@ -26,7 +26,7 @@ const ProfileProvider = ({ children }) => {
       clicked, setClicked,
       error, setError,
       spots, setSpots,
-    //   avatar_Url, setAvatar_Url
+      avatar_Url, setAvatar_Url
 
     }}>
       {children}</ProfileContext.Provider>
