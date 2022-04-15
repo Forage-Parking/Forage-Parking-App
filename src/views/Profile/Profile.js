@@ -40,6 +40,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
+      console.log(data.signedURL);
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();
@@ -67,7 +68,7 @@ export default function Profile() {
       setSpots(data2);
     };
     fetchData();
-  }, [userId, setAvatar_Url]);
+  }, [userId]);
 
   const editBtn = async () => {
     setClicked(true);
@@ -75,9 +76,6 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const data = await fetchSignedUrl(avatarUrl);
-    setAvatar_Url(data.signedURL);
 
     try {
       setLoading(true);
@@ -91,6 +89,10 @@ export default function Profile() {
         image: avatar_Url,
       };
       await updateProfile(updates);
+
+      const data1 = await fetchProfileById(id);
+      setAvatarUrl(data1.image);
+      // const data3 = await fetchSignedUrl(avatarUrl);
 
       let { error } = await client.from('profiles').upsert(updates, { returning: 'minimal' });
 
