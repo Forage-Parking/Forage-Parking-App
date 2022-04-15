@@ -23,7 +23,6 @@ export default function NewSpot() {
     price,  
     loading, 
     setLoading,
-    //Map Inof//
     lat, 
     setLat, 
     lng, 

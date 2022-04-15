@@ -44,7 +44,7 @@ const SpotProvider = ({ children }) => {
       setPrice, 
       loading, 
       setLoading,
-      //Map Inof//
+      //Map Info//
       lat, 
       setLat, 
       lng, 
@@ -60,6 +60,7 @@ const SpotProvider = ({ children }) => {
       setError, 
       spot, 
       setSpot,
+
     }}>
       {children}
     </SpotContext.Provider>
