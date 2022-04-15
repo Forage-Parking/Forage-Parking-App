@@ -3,13 +3,21 @@ import { useHistory, useParams } from 'react-router-dom';
 import { endReservation, fetchSpotById, mostRecent, newReservation } from '../../services/fetch';
 import { getUserId } from '../../services/auth';
 import { useSpotContext } from '../../context/SpotContext';
+import styled from 'styled-components';
 
 export default function SpotDetail() {
-  const { spot, setSpot, 
-    error, setError, 
-    loading, setLoading, 
-    available, setAvailable, 
-    recentRes, setRecentRes } = useSpotContext();
+  const {
+    spot,
+    setSpot,
+    error,
+    setError,
+    loading,
+    setLoading,
+    available,
+    setAvailable,
+    recentRes,
+    setRecentRes,
+  } = useSpotContext();
 
   const history = useHistory();
   const { id } = useParams();
@@ -62,7 +70,7 @@ export default function SpotDetail() {
   };
 
   return (
-    <div className="SpotDetails">
+    <StyledDiv className="SpotDetails">
       {error && <p>{error}</p>}
       <h1>{available}</h1>
       <div key={spot.id}>
@@ -90,6 +98,13 @@ export default function SpotDetail() {
       {/* <div>
         <Map />
       </div> */}
-    </div>
+    </StyledDiv>
   );
 }
+const StyledDiv = styled.div`
+  font-size: 1em;
+  img {
+    height: 350px;
+    width: 350px;
+  }
+`;

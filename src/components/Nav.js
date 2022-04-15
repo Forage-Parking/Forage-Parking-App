@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { IoLeafOutline } from 'react-icons/io5';
 import { AiFillCar } from 'react-icons/ai';
 import { fetchProfileByUserId } from '../services/fetch';
 import { getUserId } from '../services/auth';
