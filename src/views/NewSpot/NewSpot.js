@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SpotForm from '../../components/SpotForm/SpotForm';
 import Upload from '../../components/Upload/Upload';
 import { fetchSignedUrl } from '../../services/auth';
@@ -11,7 +11,9 @@ import { useHistory } from 'react-router-dom';
 import { useSpotContext } from '../../context/SpotContext';
 
 export default function NewSpot() {
-
+  const [lat, setLat] = useState(45.523064);
+  const [lng, setLng] = useState(-122.676483);
+  const [zoom, setZoom] = useState(9);
   const { 
     avatarUrl, 
     setAvatarUrl, 
@@ -22,13 +24,7 @@ export default function NewSpot() {
     nickname, 
     price,  
     loading, 
-    setLoading,
-    lat, 
-    setLat, 
-    lng, 
-    setLng,
-    zoom, 
-    setZoom, 
+    setLoading, 
     user } = useSpotContext();
 
   const mapContainer = useRef(null);
