@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
-import Upload from '../../components/Upload/Upload';
-import { fetchSignedUrl, getUserId } from '../../services/auth';
+// import Upload from '../../components/Upload/Upload';
+import { getUserId } from '../../services/auth';
 
 import { useParams } from 'react-router-dom';
 import {
@@ -30,7 +30,7 @@ export default function Profile() {
     avatarUrl, setAvatarUrl,
     clicked, setClicked, 
     error,
-    spots, setSpots } = useProfileContext();
+    spots, setSpots, } = useProfileContext();
 
    
   // const [lastName, setLastName] = useState('');
@@ -59,7 +59,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data1 = await fetchProfileById(id);
+      const data1 = await fetchProfileById(`${id}`);  //added template Literal Watch out
 
       // setProfileDetails(data1);
       setFirstName(data1.first_name);
@@ -137,7 +137,7 @@ export default function Profile() {
       <button onClick={editBtn}>Edit</button>
       <div>
         {clicked && (
-          <ProfileForm/>
+          <ProfileForm {...{ handleSubmit }}/>
         )}
       </div>
 

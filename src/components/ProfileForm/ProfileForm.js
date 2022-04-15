@@ -2,16 +2,16 @@ import React from 'react';
 import { useProfileContext } from '../../context/ProfileContext';
 import './ProfileForm.css';
 
-export default function ProfileForm() {
+export default function ProfileForm({ handleSubmit }) {
   const { setFirstName,
     setLastName,
     setUsername,
-    handleSubmit,
     setEmail,
-    firstName,
-    lastName,
-    username,
-    email } = useProfileContext();
+    email, 
+    username, 
+    lastName, 
+    firstName, 
+  } = useProfileContext();
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
       <label>First Name</label>
@@ -19,7 +19,7 @@ export default function ProfileForm() {
         type="text"
         name="first_name"
         placeholder="First Name"
-        value={firstName}
+        value={firstName ? firstName : ''} 
         onChange={(e) => setFirstName(e.target.value)}
       />
       <label>Last Name</label>
@@ -27,7 +27,7 @@ export default function ProfileForm() {
         type="text"
         name="last_name"
         placeholder="Last Name"
-        value={lastName}
+        value={lastName ? lastName : ''}
         onChange={(e) => setLastName(e.target.value)}
       />
       <label>Username</label>

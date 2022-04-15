@@ -77,7 +77,7 @@ export default function NewSpot() {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
       setAvatar_Url(data.signedURL);
-    };
+    }; 
     fetchUrl();
   }, [avatarUrl, setAvatar_Url]);
 

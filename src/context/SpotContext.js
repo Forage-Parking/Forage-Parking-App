@@ -70,7 +70,7 @@ const useSpotContext = () => {
   const resp = useContext(SpotContext);
   
   if (resp === undefined) {
-      //throw new Error('Error in BasicContext.js'); //turned off for more accurate erros
+    throw new Error('Error in SpotContext.js'); 
   }
   return resp;
 };

@@ -47,7 +47,7 @@ const useBasicContext = () => {
   const resp = useContext(BasicContext);
 
   if (resp === undefined) {
-    //throw new Error('Error in BasicContext.js'); //turned off for more accurate erros
+    throw new Error('Error in BasicContext.js');
   }
   return resp;
 };
