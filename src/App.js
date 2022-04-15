@@ -18,7 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(user);
   return (
     <BrowserRouter>
-      <AppDiv className="App">
+      <AppDiv>
         <HeaderNav />
         <Switch>
           <Route path="/auth">

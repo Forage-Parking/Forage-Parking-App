@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { Form, Box, FormField, TextInput, Button } from 'grommet';
+import { useBasicContext } from '../context/BasicContext';
 
-function Auth({
-  password,
-  email,
-  setEmail,
-  setPassword,
-  handleSubmit,
-  setType,
-  type,
-  setUsername,
-  username,
-}) {
+function Auth({ handleSubmit }) 
+{
+  const { password,
+    email,
+    setEmail,
+    setPassword,
+    setType,
+    type,
+    setUsername,
+    username } = useBasicContext();
   return (
     <Box>
       <Box>

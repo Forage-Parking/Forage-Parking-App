@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { endReservation, fetchSpotById, mostRecent, newReservation } from '../../services/fetch';
 import { getUserId } from '../../services/auth';
+import { useSpotContext } from '../../context/SpotContext';
 
 export default function SpotDetail() {
-  const [spot, setSpot] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState('');
-  const { id } = useParams();
+  const { spot, setSpot, 
+    error, setError, 
+    loading, setLoading, 
+    available, setAvailable, 
+    recentRes, setRecentRes } = useSpotContext();
+
   const history = useHistory();
-  const [available, setAvailable] = useState(false);
-  const [recentRes, setRecentRes] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
     const getData = async () => {
@@ -28,7 +30,7 @@ export default function SpotDetail() {
       }
     };
     getData();
-  }, [id]);
+  }, [id, setError, setRecentRes, setAvailable, setLoading, setSpot]);
   // load the spot by unique id
   // load the most recent reservation
   // two buttons reserver spot if end_time in true and return spot if false
