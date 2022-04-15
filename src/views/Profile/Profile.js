@@ -24,10 +24,7 @@ export default function Profile() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const [profileDetails, setProfileDetails] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [error, setError] = useState('');
   const [spots, setSpots] = useState([]);
 
   const params = useParams();
@@ -39,7 +36,6 @@ export default function Profile() {
   useEffect(() => {
     const fetchUrl = async () => {
       const data = await fetchSignedUrl(avatarUrl);
-      console.log(data.signedURL);
       setAvatar_Url(data.signedURL);
     };
     fetchUrl();

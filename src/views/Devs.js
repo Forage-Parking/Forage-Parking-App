@@ -1,4 +1,4 @@
-import { PageContent, Heading, Paragraph, Grid, Card } from 'grommet';
+import { PageContent, Heading, Grid, Card } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
 
