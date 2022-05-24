@@ -54,22 +54,25 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data1 = await fetchProfileById(`${id}`); //added template Literal Watch out
+      // try to avoid vague variable names like this
+      // remember you want future developers to know
+      // what the variable represents
+      const profileData = await fetchProfileById(`${id}`); //added template Literal Watch out
 
-      setFirstName(data1.first_name);
-      setLastName(data1.last_name);
-      setUsername(data1.username);
-      setEmail(data1.email);
-      setAvatarUrl(data1.image);
+      setFirstName(profileData.first_name);
+      setLastName(profileData.last_name);
+      setUsername(profileData.username);
+      setEmail(profileData.email);
+      setAvatarUrl(profileData.image);
     };
     fetchData();
   }, [id, setFirstName, setLastName, setUsername, setEmail, setAvatarUrl]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data2 = await fetchSpotsByOwnerId(userId);
+      const userSpots = await fetchSpotsByOwnerId(userId);
 
-      setSpots(data2);
+      setSpots(userSpots);
     };
     fetchData();
   }, [userId, setSpots]);
@@ -124,6 +127,7 @@ export default function Profile() {
     <Grid>
       <Grid>
         <Image src={avatarUrl} />
+        {/* need to guard against users not having this or else you end up with null null on your profile*/}
         <Paragraph>{` ${firstName} ${lastName}`}</Paragraph>
 
         <Paragraph>Username: {username}</Paragraph>

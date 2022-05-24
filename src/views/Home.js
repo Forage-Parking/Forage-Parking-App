@@ -31,7 +31,6 @@ export default function Home() {
             perPage: 1,
             type: 'loop',
             arrows: false,
-            // pagination: false,
             drag: 'free',
             gap: '10px',
           }}
