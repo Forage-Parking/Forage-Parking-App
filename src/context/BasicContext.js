@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUser } from '../services/auth';
 
+// I'd maybe call this user context?
 const BasicContext = createContext();
 
 const BasicProvider = ({ children }) => {
@@ -12,28 +13,27 @@ const BasicProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [type, setType] = useState('sign-in');
   const [username, setUsername] = useState('');
+  // this shouldn't be in context -- use the hook on your individual components
   const history = useHistory();
-
- 
 
   return (
     <BasicContext.Provider
       value={{
         //loading state/currentUser check/AuthStuff
-        email, 
+        email,
         setEmail,
         loading,
         setLoading,
         currentUser,
         setCurrentUser,
         history,
-        password, 
+        password,
         setPassword,
-        error, 
+        error,
         setError,
-        type, 
+        type,
         setType,
-        username, 
+        username,
         setUsername,
         ///
       }}

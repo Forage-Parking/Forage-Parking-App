@@ -3,17 +3,7 @@ import Auth from '../components/Auth';
 import { useBasicContext } from '../context/BasicContext';
 
 function AuthPage({ setCurrentUser }) {
-  // const [type, setType] = useState('sign-in');
-  const {
-    username, 
-    type, 
-    error,
-    password,
-    email,
-    setError,
-    history } = useBasicContext();
-
-  // const history = useHistory();
+  const { username, type, error, password, email, setError, history } = useBasicContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,11 +24,11 @@ function AuthPage({ setCurrentUser }) {
         setError(e.message);
       }
   };
-  
+
   return (
     <div>
       {error && <p>{error}</p>}
-      <Auth {...{ handleSubmit }}/>
+      <Auth {...{ handleSubmit }} />
     </div>
   );
 }

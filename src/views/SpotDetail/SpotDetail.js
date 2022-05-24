@@ -30,6 +30,8 @@ export default function SpotDetail() {
         setSpot(data);
 
         const recent = await mostRecent(id);
+        // add .single() to the end of your mostRecent call so you don't
+        // need the [0] on your data
         setRecentRes(recent[0] || {});
         setAvailable(recent.length === 0 || recent[0].end_time ? true : false);
         setLoading(false);
@@ -54,13 +56,11 @@ export default function SpotDetail() {
     const newRes = await newReservation(spot.id, getUserId());
     setAvailable(false);
     setRecentRes(newRes);
+    // try to avoid using alerts - display messages to the user instead
     alert('You have reserved this spot.');
   };
 
   const returnSpot = async () => {
-    // get most reservation by spot
-    // update end_time - endReservation()
-    // update available
     const recent = await mostRecent(spot.id);
     const resData = await endReservation(recent[0].id);
     setAvailable(true);

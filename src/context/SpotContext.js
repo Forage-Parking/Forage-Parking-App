@@ -3,8 +3,8 @@ import { getUserId } from '../services/auth';
 
 const SpotContext = createContext();
 
-
 const SpotProvider = ({ children }) => {
+  // why is there both avatarUrl and avatart_Url?
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar_Url, setAvatar_Url] = useState(null);
   const [size, setSize] = useState('compact');
@@ -19,49 +19,46 @@ const SpotProvider = ({ children }) => {
   const [available, setAvailable] = useState(false);
   const [recentRes, setRecentRes] = useState({});
 
-
   const [lat, setLat] = useState(45.523064);
   const [lng, setLng] = useState(-122.676483);
   const [zoom, setZoom] = useState(9);
   const user = getUserId();
 
-
-
-    
   return (
-    <SpotContext.Provider value={{ 
-      avatarUrl, 
-      setAvatarUrl, 
-      avatar_Url, 
-      setAvatar_Url, 
-      size, 
-      setSize, 
-      details, 
-      setDetails, 
-      nickname, 
-      setNickname, 
-      price, 
-      setPrice, 
-      loading, 
-      setLoading,
-      //Map Info//
-      lat, 
-      setLat, 
-      lng, 
-      setLng,
-      zoom, 
-      setZoom,
-      user, 
-      available, 
-      setAvailable, 
-      recentRes, 
-      setRecentRes,
-      error, 
-      setError, 
-      spot, 
-      setSpot,
-
-    }}>
+    <SpotContext.Provider
+      value={{
+        avatarUrl,
+        setAvatarUrl,
+        avatar_Url,
+        setAvatar_Url,
+        size,
+        setSize,
+        details,
+        setDetails,
+        nickname,
+        setNickname,
+        price,
+        setPrice,
+        loading,
+        setLoading,
+        //Map Info//
+        lat,
+        setLat,
+        lng,
+        setLng,
+        zoom,
+        setZoom,
+        user,
+        available,
+        setAvailable,
+        recentRes,
+        setRecentRes,
+        error,
+        setError,
+        spot,
+        setSpot,
+      }}
+    >
       {children}
     </SpotContext.Provider>
   );
@@ -69,12 +66,11 @@ const SpotProvider = ({ children }) => {
 
 const useSpotContext = () => {
   const resp = useContext(SpotContext);
-  
+
   if (resp === undefined) {
-    throw new Error('Error in SpotContext.js'); 
+    throw new Error('Error in SpotContext.js');
   }
   return resp;
 };
-  
+
 export { SpotProvider, useSpotContext };
-  

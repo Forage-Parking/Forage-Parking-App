@@ -1,6 +1,7 @@
 import { client, checkError } from './client.js';
 
 export function getUser() {
+  console.log(process.env.REACT_APP_SUPABASE_URL);
   return client.auth.session() && client.auth.session().user.email;
 }
 
@@ -10,11 +11,12 @@ export function getUserId() {
 
 export async function signupUser(email, password, username) {
   const { user, error } = await client.auth.signUp({ email, password });
-  await client.from('profiles').insert({ user_id: user.id, email: email, username: username });
   if (error) {
     throw error;
+  } else {
+    await client.from('profiles').insert({ user_id: user.id, email: email, username: username });
+    return user;
   }
-  return user;
 }
 
 export async function signInUser(email, password) {
