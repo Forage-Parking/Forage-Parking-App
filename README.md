@@ -7,9 +7,9 @@ Joshua Stresing (https://github.com/Joshua-Stresing), Andrea Cleland (https://gi
 
 
 ## Images of Tables:
-![Image of our profiles table rows and columns.](/assets/profiles_table.png)
-![Image of our reservations table rows and columns.](/assets/reservations_table.png)
-![Image of our spots table rows and columns.](/assets/spots_table.png)
+![Image of our profiles table rows and columns.](public/assets/profiles_table.png)
+![Image of our reservations table rows and columns.](public/assets/reservations_table.png)
+![Image of our spots table rows and columns.](public/assets/spots_table.png)
 
 ## Technologies:
 
